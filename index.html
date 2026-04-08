@@ -1,14 +1,1833 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brush For Always — La brosse. Pour toujours.</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#1d1d1f;
+  --white:#ffffff;
+  --grey:#f5f5f7;
+  --text-grey:#6e6e73;
+  --green:#22c98a;
+  --blue:#1558d6;
+  --cyan:#38c9f5;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+  --card-radius:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--white);color:var(--black);overflow-x:hidden;cursor:default}
+
+/* ─── NAV ─── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:52px;
+  background:rgba(255,255,255,0);
+  backdrop-filter:blur(0px);
+  transition:background .3s,backdrop-filter .3s,box-shadow .3s;
+}
+#nav.scrolled{
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:saturate(180%) blur(20px);
+  box-shadow:0 1px 0 rgba(0,0,0,0.08);
+}
+.nav-logo{font-size:17px;font-weight:700;letter-spacing:-0.02em;color:var(--white);transition:color .3s}
+#nav.scrolled .nav-logo{color:var(--black)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:13px;font-weight:400;color:rgba(255,255,255,0.8);text-decoration:none;transition:color .3s}
+#nav.scrolled .nav-links a{color:var(--text-grey)}
+.nav-links a:hover{color:var(--white)}
+#nav.scrolled .nav-links a:hover{color:var(--black)}
+.nav-cta{
+  font-size:13px;font-weight:500;padding:7px 18px;border-radius:980px;
+  background:rgba(255,255,255,0.15);color:var(--white);text-decoration:none;border:none;
+  transition:background .3s,color .3s;cursor:pointer;
+}
+#nav.scrolled .nav-cta{background:var(--black);color:var(--white)}
+.nav-cta:hover{background:rgba(255,255,255,0.25)!important}
+#nav.scrolled .nav-cta:hover{background:#3a3a3c!important}
+
+/* ─── SECTIONS ─── */
+section{width:100%}
+
+/* ─── HERO ─── */
+#hero{
+  height:100vh;min-height:700px;
+  background:#000;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-content{
+  position:relative;z-index:2;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:20px;
+}
+.hero-eyebrow{
+  font-size:13px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--green);opacity:0;transform:translateY(20px);
+  transition:opacity .8s .2s ease,transform .8s .2s ease;
+}
+.hero-title{
+  font-size:clamp(56px,8vw,112px);font-weight:800;letter-spacing:-0.04em;
+  color:var(--white);line-height:1;
+  opacity:0;transform:translateY(40px);
+  transition:opacity .8s .4s ease,transform .8s .4s ease;
+}
+.hero-sub{
+  font-size:clamp(16px,1.8vw,22px);font-weight:300;
+  color:rgba(255,255,255,0.55);letter-spacing:-0.01em;
+  opacity:0;transform:translateY(30px);
+  transition:opacity .8s .6s ease,transform .8s .6s ease;
+}
+.hero-loaded .hero-eyebrow,
+.hero-loaded .hero-title,
+.hero-loaded .hero-sub{opacity:1;transform:none}
+.scroll-indicator{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:fadeIn .8s 1.4s forwards;
+}
+.scroll-indicator span{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase}
+.scroll-line{width:1px;height:40px;background:rgba(255,255,255,0.2);position:relative;overflow:hidden}
+.scroll-line::after{
+  content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;
+  background:rgba(255,255,255,0.7);animation:scrollDrop 2s 1.4s infinite;
+}
+@keyframes scrollDrop{0%{top:-100%}100%{top:100%}}
+@keyframes fadeIn{to{opacity:1}}
+
+/* ─── SECTION 2 — CHIFFRE FORT ─── */
+#stat{
+  height:100vh;background:var(--white);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:24px;
+}
+.stat-number{
+  font-size:clamp(100px,18vw,220px);font-weight:800;letter-spacing:-0.05em;
+  color:var(--black);line-height:1;font-variant-numeric:tabular-nums;
+}
+.stat-number span{color:var(--green)}
+.stat-sub{font-size:clamp(18px,2vw,26px);font-weight:300;color:var(--text-grey);letter-spacing:-0.01em}
+.fade-up{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.fade-up.visible{opacity:1;transform:none}
+
+/* ─── SECTION 3 — STICKY PRODUCT ─── */
+#product{background:var(--grey);position:relative}
+.product-sticky-wrap{
+  display:flex;align-items:flex-start;min-height:400vh;position:relative;
+}
+.product-canvas-wrap{
+  position:sticky;top:0;height:100vh;width:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+#product-canvas{width:100%;height:100%}
+.product-steps{
+  width:50%;padding:0 80px;
+  display:flex;flex-direction:column;justify-content:flex-start;
+  padding-top:100vh;padding-bottom:100vh;
+}
+.product-step{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;padding:60px 0;
+}
+.step-tag{
+  font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--text-grey);margin-bottom:16px;opacity:0;transform:translateX(20px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.step-title{
+  font-size:clamp(42px,5vw,72px);font-weight:800;letter-spacing:-0.04em;
+  color:var(--black);line-height:1;margin-bottom:20px;
+  opacity:0;transform:translateX(20px);
+  transition:opacity .6s .1s ease,transform .6s .1s ease;
+}
+.step-desc{
+  font-size:17px;font-weight:300;color:var(--text-grey);line-height:1.6;max-width:440px;
+  opacity:0;transform:translateX(20px);
+  transition:opacity .6s .2s ease,transform .6s .2s ease;
+}
+.product-step.visible .step-tag,
+.product-step.visible .step-title,
+.product-step.visible .step-desc{opacity:1;transform:none}
+.step-accent{display:inline-block;width:32px;height:4px;border-radius:2px;margin-bottom:24px}
+
+/* ─── SECTION 4 — RECYCLABLE ─── */
+#recycle{
+  min-height:100vh;background:var(--black);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:32px;text-align:center;padding:120px 48px;
+}
+.recycle-badge{
+  width:72px;height:72px;border-radius:50%;background:var(--green);
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;
+  box-shadow:0 0 0 0 rgba(34,201,138,0.4);
+  animation:pulse 2.5s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(34,201,138,0.4)}
+  70%{box-shadow:0 0 0 24px rgba(34,201,138,0)}
+  100%{box-shadow:0 0 0 0 rgba(34,201,138,0)}
+}
+.recycle-title{
+  font-size:clamp(40px,6vw,84px);font-weight:800;letter-spacing:-0.04em;
+  color:var(--white);line-height:1.05;
+}
+.recycle-sub{font-size:20px;font-weight:300;color:rgba(255,255,255,0.5)}
+.detach-visual{
+  display:flex;align-items:center;gap:0;
+  font-size:13px;color:rgba(255,255,255,0.3);letter-spacing:0.06em;text-transform:uppercase;
+  margin-top:16px;
+}
+.brush-part{
+  padding:10px 20px;border-radius:8px;
+  font-size:13px;font-weight:500;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.15);
+  transition:all .4s;
+}
+.brush-part.head{background:rgba(34,201,138,0.15);border-color:var(--green);color:var(--green)}
+.detach-gap{
+  width:40px;height:2px;background:rgba(255,255,255,0.15);
+  position:relative;overflow:hidden;
+}
+.detach-gap::after{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:var(--green);animation:slideGap 2.5s infinite;
+}
+@keyframes slideGap{0%,100%{left:-100%}50%{left:100%}}
+
+/* ─── SECTION 5 — COMPARATIF (ENHANCED) ─── */
+#compare{
+  padding:120px 48px;background:var(--white);
+}
+.compare-header{text-align:center;margin-bottom:80px}
+.section-title{
+  font-size:clamp(36px,5vw,64px);font-weight:800;letter-spacing:-0.04em;
+  color:var(--black);line-height:1;
+}
+.section-sub{font-size:19px;font-weight:300;color:var(--text-grey);margin-top:12px}
+
+/* Tab bar inside compare */
+.compare-tabs{
+  display:flex;gap:8px;justify-content:center;margin-bottom:48px;flex-wrap:wrap;
+}
+.compare-tab{
+  padding:10px 24px;border-radius:980px;font-size:13px;font-weight:600;
+  border:1.5px solid rgba(0,0,0,0.1);background:transparent;color:var(--text-grey);
+  cursor:pointer;transition:all .3s;font-family:var(--font);
+}
+.compare-tab.active{background:var(--black);color:var(--white);border-color:var(--black)}
+.compare-tab:hover:not(.active){border-color:var(--black);color:var(--black)}
+
+.compare-panel{display:none}
+.compare-panel.active{display:block}
+
+/* Quick table (from bfa) */
+.compare-table{
+  max-width:1100px;margin:0 auto;
+  border-collapse:collapse;width:100%;
+}
+.compare-table th{
+  font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--text-grey);padding:14px 20px;text-align:center;
+}
+.compare-table th.brand-bfa{
+  font-size:15px;font-weight:700;color:var(--black);letter-spacing:-0.01em;text-transform:none;
+}
+.compare-table td{
+  padding:18px 20px;text-align:center;font-size:15px;
+  border-top:1px solid rgba(0,0,0,0.05);
+}
+.compare-table td:first-child{text-align:left;font-size:14px;font-weight:500;color:var(--black)}
+.compare-table tr:nth-child(even) td{background:var(--grey)}
+.check{color:var(--green);font-size:18px}
+.cross{color:#e5e5ea;font-size:18px}
+.partial{color:var(--cyan);font-size:15px;font-weight:500}
+.score-high{
+  display:inline-block;padding:3px 10px;border-radius:4px;
+  background:rgba(34,201,138,0.12);color:var(--green);font-weight:600;font-size:13px;
+}
+.score-mid{
+  display:inline-block;padding:3px 10px;border-radius:4px;
+  background:rgba(255,149,0,0.1);color:#ff9500;font-weight:600;font-size:13px;
+}
+.score-low{
+  display:inline-block;padding:3px 10px;border-radius:4px;
+  background:rgba(255,59,48,0.08);color:#ff3b30;font-weight:600;font-size:13px;
+}
+
+/* Competitor cards */
+.competitor-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;max-width:1200px;margin:0 auto;
+}
+.competitor-card{
+  border-radius:var(--card-radius);padding:32px;
+  transition:transform .3s,box-shadow .3s;cursor:default;
+  position:relative;overflow:hidden;
+}
+.competitor-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.1)}
+.competitor-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+}
+.cc-bfa{background:rgba(21,88,214,0.06);border:2px solid var(--blue)}
+.cc-bfa::before{background:var(--blue)}
+.cc-lama{background:rgba(39,103,73,0.04);border:1px solid rgba(39,103,73,0.2)}
+.cc-lama::before{background:#276749}
+.cc-colgate{background:rgba(192,86,33,0.04);border:1px solid rgba(192,86,33,0.2)}
+.cc-colgate::before{background:#c05621}
+.cc-caliquo{background:rgba(85,60,154,0.04);border:1px solid rgba(85,60,154,0.2)}
+.cc-caliquo::before{background:#553c9a}
+.cc-bioseptyl{background:rgba(56,169,105,0.04);border:1px solid rgba(56,169,105,0.2)}
+.cc-bioseptyl::before{background:#38a169}
+.cc-900care{background:rgba(214,158,46,0.04);border:1px solid rgba(214,158,46,0.2)}
+.cc-900care::before{background:#d69e2e}
+
+.cc-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.cc-logo{
+  padding:6px 14px;border-radius:8px;color:var(--white);
+  font-weight:800;font-size:12px;letter-spacing:0.02em;
+}
+.cc-badge{
+  font-size:10px;font-weight:700;padding:3px 10px;border-radius:980px;
+}
+.cc-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;color:var(--text-grey);
+}
+.cc-grid strong{color:var(--black);font-weight:600}
+.cc-opportunity{
+  margin-top:20px;padding:14px 18px;border-radius:12px;
+  background:rgba(21,88,214,0.06);
+  font-size:12px;color:var(--blue);line-height:1.5;
+}
+
+/* Detailed comparison table */
+.detail-table{
+  max-width:1200px;margin:0 auto;width:100%;border-collapse:collapse;font-size:13px;
+}
+.detail-table thead tr{background:var(--black);color:var(--white)}
+.detail-table thead th{padding:14px 16px;text-align:left;font-weight:600;font-size:12px}
+.detail-table thead th:first-child{border-radius:12px 0 0 0}
+.detail-table thead th:last-child{border-radius:0 12px 0 0}
+.detail-table tbody tr{border-bottom:1px solid rgba(0,0,0,0.05);transition:background .15s}
+.detail-table tbody tr:hover{background:rgba(21,88,214,0.03)}
+.detail-table td{padding:14px 16px;vertical-align:middle}
+.detail-table td:first-child{font-weight:600;color:var(--black)}
+.detail-table .highlight-row{background:rgba(21,88,214,0.06)!important}
+.detail-table .highlight-row td:first-child{color:var(--blue)}
+
+.brand-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:4px 12px 4px 6px;border-radius:20px;font-weight:700;font-size:12px;
+}
+.brand-icon{
+  width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:800;color:white;
+}
+.score-bar-wrap{display:flex;align-items:center;gap:8px}
+.score-bar{height:6px;border-radius:3px;background:rgba(0,0,0,0.06);flex:1;overflow:hidden}
+.score-fill{height:100%;border-radius:3px}
+.score-num{font-size:11px;font-weight:600;color:var(--text-grey);white-space:nowrap}
+
+/* ─── SECTION 6 — DONNÉES MARCHÉ (ENHANCED) ─── */
+#data{padding:120px 48px;background:var(--grey)}
+.data-header{text-align:center;margin-bottom:80px}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:2px;max-width:1000px;margin:0 auto;
+  background:rgba(0,0,0,0.05);border-radius:20px;overflow:hidden;
+}
+.stat-card{
+  background:var(--white);padding:52px 40px;
+  display:flex;flex-direction:column;gap:10px;
+  transition:background .3s;
+}
+.stat-card:hover{background:#fafafa}
+.stat-val{
+  font-size:clamp(36px,4vw,56px);font-weight:800;letter-spacing:-0.04em;
+  color:var(--black);font-variant-numeric:tabular-nums;
+}
+.stat-val .stat-unit{font-size:0.5em;font-weight:400;color:var(--text-grey);margin-left:4px}
+.stat-label{font-size:14px;font-weight:400;color:var(--text-grey);line-height:1.4}
+.stat-trend{font-size:12px;font-weight:500;color:var(--green)}
+
+/* Market deep-dive cards */
+.market-deep-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:20px;max-width:1200px;margin:48px auto 0;
+}
+.market-deep-card{
+  background:var(--white);border-radius:var(--card-radius);padding:32px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.04);
+  transition:transform .3s,box-shadow .3s;
+}
+.market-deep-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
+.mdc-title{
+  font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:20px;
+}
+.bar-chart{display:flex;flex-direction:column;gap:12px}
+.bar-row{display:flex;align-items:center;gap:10px}
+.bar-label{font-size:12px;font-weight:600;color:var(--text-grey);width:90px;flex-shrink:0}
+.bar-outer{flex:1;height:24px;background:rgba(0,0,0,0.04);border-radius:8px;overflow:hidden}
+.bar-inner{
+  height:100%;border-radius:8px;display:flex;align-items:center;padding-left:10px;
+  transition:width 1.2s cubic-bezier(.4,0,.2,1);
+}
+.bar-val{font-size:11px;font-weight:700;color:white;white-space:nowrap}
+.mdc-source{font-size:10px;color:var(--text-grey);margin-top:16px;font-style:italic}
+
+.insight-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.insight-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;color:var(--text-grey);line-height:1.6;
+}
+.insight-list li::before{
+  content:'→';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;
+}
+.insight-list li strong{color:var(--black)}
+
+/* ─── SECTION 7 — PORTER ─── */
+#porter{padding:120px 48px;background:var(--white)}
+.porter-header{text-align:center;margin-bottom:80px}
+.porter-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;max-width:1200px;margin:0 auto;
+}
+.porter-card{
+  padding:40px 36px;border-radius:var(--card-radius);background:var(--grey);
+  transition:transform .3s ease,box-shadow .3s ease;
+  cursor:default;
+}
+.porter-card:hover{transform:scale(1.02);box-shadow:0 20px 60px rgba(0,0,0,0.08)}
+.porter-force{font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-grey);margin-bottom:12px}
+.porter-name{font-size:26px;font-weight:800;letter-spacing:-0.03em;color:var(--black);margin-bottom:16px}
+.intensity-bar{height:4px;border-radius:2px;background:rgba(0,0,0,0.08);margin-bottom:20px;overflow:hidden}
+.intensity-fill{height:100%;border-radius:2px;transition:width 1s ease}
+.intensity-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px}
+.porter-implication{font-size:14px;color:var(--text-grey);line-height:1.6;font-weight:300}
+.intensity-low .intensity-fill{background:var(--green);width:35%}
+.intensity-mod .intensity-fill{background:#ff9500;width:55%}
+.intensity-high .intensity-fill{background:#ff6b35;width:75%}
+.intensity-vhigh .intensity-fill{background:#ff3b30;width:92%}
+.intensity-low .intensity-label{color:var(--green)}
+.intensity-mod .intensity-label{color:#ff9500}
+.intensity-high .intensity-label{color:#ff6b35}
+.intensity-vhigh .intensity-label{color:#ff3b30}
+
+/* ─── SECTION 8 — CTA ─── */
+#cta{
+  min-height:100vh;background:var(--black);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:80px 48px;gap:28px;
+}
+.cta-title{
+  font-size:clamp(48px,8vw,108px);font-weight:800;letter-spacing:-0.04em;
+  color:var(--white);line-height:1;
+}
+.cta-sub{
+  font-size:clamp(16px,1.8vw,22px);font-weight:300;
+  color:rgba(255,255,255,0.5);max-width:520px;line-height:1.5;
+}
+.cta-btn{
+  display:inline-block;margin-top:8px;padding:16px 40px;
+  border-radius:980px;background:var(--white);color:var(--black);
+  font-size:17px;font-weight:600;text-decoration:none;
+  transition:transform .25s ease,box-shadow .25s ease,background .25s;
+  letter-spacing:-0.01em;border:none;cursor:pointer;
+}
+.cta-btn:hover{transform:scale(1.04);box-shadow:0 8px 40px rgba(255,255,255,0.15)}
+.cta-green{color:var(--green)}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--black);padding:40px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,0.08);flex-wrap:wrap;gap:12px;
+}
+footer span{font-size:13px;color:rgba(255,255,255,0.35)}
+footer .ft-green{color:var(--green)}
+
+/* ─── PARTICLES CANVAS ─── */
+#particles-canvas{
+  position:fixed;inset:0;pointer-events:none;z-index:9998;
+  opacity:0;transition:opacity .1s;
+}
+#particles-canvas.active{opacity:1}
+
+/* ─── MODAL ─── */
+#bfa-modal{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+#bfa-modal.open{pointer-events:all}
+#modal-backdrop{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,0);
+  backdrop-filter:blur(0px);
+  -webkit-backdrop-filter:blur(0px);
+  transition:background .5s,backdrop-filter .5s;
+}
+#bfa-modal.open #modal-backdrop{
+  background:rgba(0,0,0,0.65);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+#modal-box{
+  position:relative;
+  width:min(960px,96vw);
+  max-height:90vh;
+  background:var(--white);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 40px 120px rgba(0,0,0,0.3);
+  transform:scale(0.88) translateY(40px);
+  opacity:0;
+  transition:transform .5s cubic-bezier(.34,1.56,.64,1),opacity .4s ease;
+  display:flex;flex-direction:column;
+}
+#bfa-modal.open #modal-box{transform:scale(1) translateY(0);opacity:1}
+
+#modal-close{
+  position:absolute;top:18px;right:20px;z-index:10;
+  background:rgba(0,0,0,0.06);border:none;
+  width:32px;height:32px;border-radius:50%;
+  font-size:14px;cursor:pointer;color:var(--text-grey);
+  transition:background .2s,transform .2s;display:flex;align-items:center;justify-content:center;
+}
+#modal-close:hover{background:rgba(0,0,0,0.12);transform:rotate(90deg)}
+
+/* STEPS BAR */
+#modal-steps-bar{
+  display:flex;align-items:center;justify-content:center;
+  padding:20px 0 0;gap:0;flex-shrink:0;
+}
+.mstep{
+  font-size:12px;font-weight:600;letter-spacing:0.04em;
+  color:rgba(0,0,0,0.25);padding:6px 16px;border-radius:980px;
+  transition:color .3s,background .3s;cursor:default;
+}
+.mstep.active{color:var(--black);background:var(--grey)}
+.mstep-line{width:32px;height:1px;background:rgba(0,0,0,0.1)}
+
+/* SCREENS */
+.modal-screen{display:none;flex:1;min-height:0}
+.modal-screen.active{display:flex}
+
+/* SPLIT LAYOUT */
+.ms-left{
+  width:42%;background:var(--grey);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;position:relative;flex-shrink:0;
+}
+#modal-canvas,#modal-canvas-2{width:100%;height:360px;display:block}
+#modal-brush-label,#head-preview-label{
+  font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text-grey);margin-top:8px;
+}
+.ms-right{
+  flex:1;padding:40px 48px;overflow-y:auto;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.ms-tag{
+  font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--green);margin-bottom:10px;
+}
+.ms-title{
+  font-size:clamp(28px,3vw,42px);font-weight:800;
+  letter-spacing:-0.04em;color:var(--black);line-height:1.05;margin-bottom:28px;
+}
+
+/* FORMULA CARDS */
+.formula-grid{display:flex;flex-direction:column;gap:10px}
+.formula-card{
+  position:relative;border-radius:14px;border:2px solid transparent;
+  background:var(--grey);cursor:pointer;
+  transition:border-color .25s,background .25s,transform .2s;
+  overflow:hidden;
+}
+.formula-card input{position:absolute;opacity:0;pointer-events:none}
+.formula-card:has(input:checked){
+  border-color:var(--black);background:var(--white);
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+.formula-card.best:has(input:checked){border-color:var(--green)}
+.formula-card:hover{transform:translateX(3px)}
+.fc-inner{padding:14px 18px}
+.fc-name{font-size:13px;font-weight:700;color:var(--black);margin-bottom:2px}
+.fc-price{font-size:22px;font-weight:800;letter-spacing:-0.03em;color:var(--black)}
+.fc-price span{font-size:13px;font-weight:400;color:var(--text-grey)}
+.fc-desc{font-size:12px;color:var(--text-grey);margin-top:2px}
+.fc-badge{
+  position:absolute;top:10px;right:12px;
+  background:var(--green);color:var(--white);
+  font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  padding:2px 8px;border-radius:980px;
+}
+
+/* HEAD OPTIONS */
+.head-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.head-opt{
+  border-radius:14px;border:2px solid transparent;
+  background:var(--grey);padding:14px 16px;cursor:pointer;
+  transition:border-color .25s,transform .2s,background .25s;
+  display:flex;flex-direction:column;gap:6px;
+}
+.head-opt:hover{transform:scale(1.02)}
+.head-opt.active{border-color:var(--black);background:var(--white);box-shadow:0 4px 16px rgba(0,0,0,0.07)}
+.ho-swatch{width:28px;height:28px;border-radius:50%}
+.ho-name{font-size:14px;font-weight:700;color:var(--black)}
+.ho-sub{font-size:11px;color:var(--text-grey)}
+
+/* BUTTONS */
+.ms-next{
+  margin-top:28px;padding:14px 28px;border-radius:980px;
+  background:var(--black);color:var(--white);border:none;
+  font-size:15px;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;gap:6px;width:fit-content;
+  transition:transform .25s,box-shadow .25s;font-family:var(--font);
+}
+.ms-next:hover{transform:scale(1.04);box-shadow:0 8px 30px rgba(0,0,0,0.15)}
+.ms-back{
+  margin-top:28px;padding:14px 20px;border-radius:980px;
+  background:transparent;color:var(--text-grey);border:1.5px solid rgba(0,0,0,0.12);
+  font-size:14px;font-weight:500;cursor:pointer;font-family:var(--font);
+  transition:border-color .2s,color .2s;
+}
+.ms-back:hover{border-color:var(--black);color:var(--black)}
+
+/* CONFIRMATION */
+.confirm-center{
+  width:100%;padding:48px 40px;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;gap:16px;
+}
+#confirm-anim{position:relative;width:88px;height:88px;margin-bottom:8px}
+#confirm-ring{width:88px;height:88px;position:absolute;inset:0}
+#confirm-arc{transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)}
+#confirm-check{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:30px;color:var(--green);opacity:0;transform:scale(0.5);
+  transition:opacity .4s .9s,transform .4s .9s cubic-bezier(.34,1.56,.64,1);
+}
+#confirm-anim.done #confirm-check{opacity:1;transform:scale(1)}
+.confirm-title{
+  font-size:clamp(28px,3.5vw,44px);font-weight:800;
+  letter-spacing:-0.04em;color:var(--black);
+}
+.confirm-sub{font-size:15px;color:var(--text-grey);max-width:400px;line-height:1.5}
+.confirm-eco{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:4px;
+}
+.confirm-eco span{
+  font-size:12px;font-weight:500;
+  background:rgba(34,201,138,0.1);color:var(--green);
+  padding:5px 12px;border-radius:980px;
+}
+.confirm-go{
+  margin-top:8px;padding:16px 36px;border-radius:980px;
+  background:var(--green);color:var(--white);border:none;
+  font-size:16px;font-weight:700;cursor:pointer;font-family:var(--font);
+  transition:transform .25s,box-shadow .25s;letter-spacing:-0.01em;
+}
+.confirm-go:hover{transform:scale(1.04);box-shadow:0 8px 40px rgba(34,201,138,0.35)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  #nav{padding:0 24px}
+  .product-sticky-wrap{flex-direction:column}
+  .product-canvas-wrap{width:100%;height:60vw;position:relative}
+  .product-steps{width:100%;padding:40px 24px;padding-top:0;padding-bottom:60px}
+  .product-step{min-height:auto;padding:60px 0}
+  #compare{padding:80px 24px}
+  #data{padding:80px 24px}
+  #porter{padding:80px 24px}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  footer{flex-direction:column;text-align:center}
+  .competitor-grid{grid-template-columns:1fr}
+  .market-deep-grid{grid-template-columns:1fr}
+  .detail-table{font-size:11px}
+  .detail-table th,.detail-table td{padding:10px 8px}
+  .compare-table{font-size:12px}
+  .compare-table th,.compare-table td{padding:12px 10px}
+  .ms-left{display:none}
+  .ms-right{padding:24px}
+  #modal-box{width:98vw;max-height:95vh}
+}
+</style>
 </head>
 <body>
 
-    <h1>Bonjour, je suis Melvin 👋</h1>
-    <p>Bienvenue sur mon portfolio !</p>
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">BFA</div>
+  <ul class="nav-links">
+    <li><a href="#product">Produit</a></li>
+    <li><a href="#compare">Comparatif</a></li>
+    <li><a href="#data">Marché</a></li>
+    <li><a href="#porter">Analyse</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Commander</a>
+</nav>
 
+<!-- SECTION 1 — HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content" id="hero-content">
+    <div class="hero-eyebrow">Tête interchangeable · Manche à vie</div>
+    <h1 class="hero-title">La brosse.<br>Pour toujours.</h1>
+    <p class="hero-sub">Le premier manche que vous n'aurez besoin d'acheter qu'une fois.</p>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- SECTION 2 — CHIFFRE FORT -->
+<section id="stat">
+  <div class="stat-number fade-up" id="counter-wrap">
+    <span id="counter">0</span><span style="color:var(--green)">%</span>
+  </div>
+  <p class="stat-sub fade-up" style="transition-delay:.15s">de plastique en moins vs une brosse classique.</p>
+</section>
+
+<!-- SECTION 3 — STICKY PRODUCT -->
+<section id="product">
+  <div class="product-sticky-wrap">
+    <div class="product-canvas-wrap">
+      <canvas id="product-canvas"></canvas>
+    </div>
+    <div class="product-steps" id="product-steps">
+      <div class="product-step" data-step="0">
+        <div class="step-accent" style="background:var(--text-grey)"></div>
+        <div class="step-tag">Matériau principal</div>
+        <div class="step-title">Le manche.</div>
+        <div class="step-desc">Taillé dans du hêtre français certifié FSC. Ultra-léger, durable, conçu pour traverser les décennies à vos côtés sans jamais perdre son éclat.</div>
+      </div>
+      <div class="product-step" data-step="1">
+        <div class="step-accent" style="background:var(--blue)"></div>
+        <div class="step-tag">Ergonomie</div>
+        <div class="step-title">La zone grip.</div>
+        <div class="step-desc">Rainures profilées pour une prise en main parfaite. Antiglisse même mouillé. Pensé pour chaque geste, chaque matin, depuis vingt ans.</div>
+      </div>
+      <div class="product-step" data-step="2">
+        <div class="step-accent" style="background:var(--green)"></div>
+        <div class="step-tag">Connexion</div>
+        <div class="step-title">Le joint.</div>
+        <div class="step-desc">Anneau magnétique en biopolymère certifié. Un clic, c'est fixé. Un clic, c'est libéré. La tête se recycle. Le manche reste.</div>
+      </div>
+      <div class="product-step" data-step="3">
+        <div class="step-accent" style="background:var(--cyan)"></div>
+        <div class="step-tag">Nettoyage</div>
+        <div class="step-title">La tête.</div>
+        <div class="step-desc">Poils en nylon recyclé densité premium. Durée de vie optimale 3 mois. Retour freepost inclus dans chaque abonnement pour recyclage certifié.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 — RECYCLABLE -->
+<section id="recycle">
+  <div class="recycle-badge fade-up">♻</div>
+  <h2 class="recycle-title fade-up" style="transition-delay:.1s">La tête se recycle.<br>Le manche reste.</h2>
+  <p class="recycle-sub fade-up" style="transition-delay:.2s">Zéro déchet. Zéro compromis.</p>
+  <div class="detach-visual fade-up" style="transition-delay:.3s">
+    <div class="brush-part">Manche · à vie</div>
+    <div class="detach-gap" style="width:60px"></div>
+    <div class="brush-part head">Tête · recyclée</div>
+  </div>
+</section>
+
+<!-- SECTION 5 — COMPARATIF (ENHANCED — merged from both files) -->
+<section id="compare">
+  <div class="compare-header fade-up">
+    <h2 class="section-title">Comparez.<br>La différence est évidente.</h2>
+    <p class="section-sub">BFA face aux alternatives du marché français.</p>
+  </div>
+
+  <!-- Tab navigation -->
+  <div class="compare-tabs fade-up" style="transition-delay:.1s">
+    <button class="compare-tab active" onclick="showCompareTab('tab-overview')">Vue d'ensemble</button>
+    <button class="compare-tab" onclick="showCompareTab('tab-competitors')">Fiches concurrents</button>
+    <button class="compare-tab" onclick="showCompareTab('tab-detail')">Comparatif détaillé</button>
+  </div>
+
+  <!-- TAB 1: Overview (original bfa table + enhanced) -->
+  <div class="compare-panel active" id="tab-overview">
+    <table class="compare-table fade-up" style="transition-delay:.15s">
+      <thead>
+        <tr>
+          <th style="text-align:left">Critère</th>
+          <th class="brand-bfa">BFA</th>
+          <th>Bioseptyl</th>
+          <th>900.care</th>
+          <th>Colgate Keep</th>
+          <th>Lamazuna</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Made in France</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="cross">–</span></td>
+          <td><span class="cross">–</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Manche à vie</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="cross">–</span></td>
+          <td><span class="cross">–</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="cross">–</span></td>
+        </tr>
+        <tr>
+          <td>Tête interchangeable</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="cross">–</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Abonnement tête</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="cross">–</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="cross">–</span></td>
+          <td><span class="cross">–</span></td>
+        </tr>
+        <tr>
+          <td>Recyclage certifié</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="partial">Partiel</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="cross">–</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Segment seniors/enfants</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="cross">–</span></td>
+          <td><span class="cross">–</span></td>
+          <td><span class="cross">–</span></td>
+          <td><span class="cross">–</span></td>
+        </tr>
+        <tr>
+          <td>Éco-score</td>
+          <td><span class="score-high">A+</span></td>
+          <td><span class="score-mid">B</span></td>
+          <td><span class="score-high">A</span></td>
+          <td><span class="score-low">C</span></td>
+          <td><span class="score-high">A</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TAB 2: Competitor Cards (from index_html) -->
+  <div class="compare-panel" id="tab-competitors">
+    <div class="competitor-grid fade-up">
+      <!-- BFA -->
+      <div class="competitor-card cc-bfa">
+        <div class="cc-header">
+          <div class="cc-logo" style="background:var(--blue)">BRUSH FOR ALWAYS</div>
+          <span class="cc-badge" style="background:rgba(21,88,214,0.12);color:var(--blue)">⭐ Votre marque</span>
+        </div>
+        <div class="cc-grid">
+          <div><strong>Manche :</strong> Biomatériau durable à vie</div>
+          <div><strong>Poils :</strong> Souple / médium / enfant / senior</div>
+          <div><strong>Remplacement :</strong> Tous les 3 mois</div>
+          <div><strong>Abonnement :</strong> ✓ Dès 4,90€/mois</div>
+          <div><strong>Éco-score :</strong> ⭐⭐⭐⭐⭐</div>
+          <div><strong>Recyclage :</strong> ✓ Certifié · Freepost</div>
+        </div>
+      </div>
+
+      <!-- Lamazuna -->
+      <div class="competitor-card cc-lama">
+        <div class="cc-header">
+          <div class="cc-logo" style="background:#276749">LAMAZUNA</div>
+          <span class="cc-badge" style="background:rgba(39,103,73,0.1);color:#276749">🇫🇷 Concurrent direct</span>
+          <span class="cc-badge" style="background:rgba(255,59,48,0.1);color:#ff3b30">⚠ Redressement 2024</span>
+        </div>
+        <div class="cc-grid">
+          <div><strong>Manche :</strong> Bioplastique ricin 70%, France</div>
+          <div><strong>Poils :</strong> Extra-souple / Souple / Médium</div>
+          <div><strong>Remplacement :</strong> Tous les 3 mois</div>
+          <div><strong>Prix manche :</strong> ~5,90 €</div>
+          <div><strong>Prix 3 têtes :</strong> ~6,32 €</div>
+          <div><strong>Recyclage :</strong> Terracycle ✓</div>
+        </div>
+        <div class="cc-opportunity">💡 Lamazuna fragilisée → fenêtre pour capter sa clientèle éco-responsable.</div>
+      </div>
+
+      <!-- Colgate Keep -->
+      <div class="competitor-card cc-colgate">
+        <div class="cc-header">
+          <div class="cc-logo" style="background:#c05621">COLGATE KEEP</div>
+          <span class="cc-badge" style="background:rgba(192,86,33,0.1);color:#c05621">🌍 Géant mondial</span>
+        </div>
+        <div class="cc-grid">
+          <div><strong>Manche :</strong> Aluminium (−80% plastique)</div>
+          <div><strong>Poils :</strong> Slim Soft / Charcoal / Deep Clean</div>
+          <div><strong>Gammes :</strong> Whitening, 360°, Max White</div>
+          <div><strong>Fabrication :</strong> Chine</div>
+          <div><strong>Éco-score :</strong> ⭐⭐⭐</div>
+          <div><strong>Abonnement :</strong> Non</div>
+        </div>
+      </div>
+
+      <!-- Caliquo -->
+      <div class="competitor-card cc-caliquo">
+        <div class="cc-header">
+          <div class="cc-logo" style="background:#553c9a">CALIQUO</div>
+          <span class="cc-badge" style="background:rgba(85,60,154,0.1);color:#553c9a">🇫🇷 Compatible Lamazuna</span>
+        </div>
+        <div class="cc-grid">
+          <div><strong>Manche :</strong> Compatible manche Lamazuna</div>
+          <div><strong>Prix têtes :</strong> ~2× moins cher</div>
+          <div><strong>Poils :</strong> Souple / médium</div>
+          <div><strong>Stratégie :</strong> Capturer la base Lamazuna</div>
+        </div>
+      </div>
+
+      <!-- Bioseptyl -->
+      <div class="competitor-card cc-bioseptyl">
+        <div class="cc-header">
+          <div class="cc-logo" style="background:#38a169">BIOSEPTYL</div>
+          <span class="cc-badge" style="background:rgba(56,169,105,0.1);color:#38a169">🇫🇷 Leader GMS</span>
+        </div>
+        <div class="cc-grid">
+          <div><strong>Position :</strong> Leader historique GMS France</div>
+          <div><strong>Fabrication :</strong> France (Picardie)</div>
+          <div><strong>Recyclage :</strong> Partiel</div>
+          <div><strong>Abonnement :</strong> Non</div>
+        </div>
+      </div>
+
+      <!-- 900.care -->
+      <div class="competitor-card cc-900care">
+        <div class="cc-header">
+          <div class="cc-logo" style="background:#d69e2e">900.CARE</div>
+          <span class="cc-badge" style="background:rgba(214,158,46,0.1);color:#d69e2e">💰 32M€ levés</span>
+        </div>
+        <div class="cc-grid">
+          <div><strong>Position :</strong> DNVB hygiène éco-responsable</div>
+          <div><strong>Modèle :</strong> Abonnement multi-produits</div>
+          <div><strong>Fabrication :</strong> Hors France</div>
+          <div><strong>Éco-score :</strong> A</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: Detailed Table (from index_html) -->
+  <div class="compare-panel" id="tab-detail">
+    <div style="overflow-x:auto">
+    <table class="detail-table fade-up">
+      <thead>
+        <tr>
+          <th>Critère</th>
+          <th>
+            <div class="brand-pill" style="background:rgba(21,88,214,0.12)">
+              <div class="brand-icon" style="background:var(--blue)">B</div>
+              <span style="color:var(--blue)">BFA</span>
+            </div>
+          </th>
+          <th>
+            <div class="brand-pill" style="background:rgba(39,103,73,0.1)">
+              <div class="brand-icon" style="background:#276749">L</div>
+              <span style="color:#276749">Lamazuna</span>
+            </div>
+          </th>
+          <th>
+            <div class="brand-pill" style="background:rgba(192,86,33,0.1)">
+              <div class="brand-icon" style="background:#c05621">C</div>
+              <span style="color:#c05621">Colgate Keep</span>
+            </div>
+          </th>
+          <th>
+            <div class="brand-pill" style="background:rgba(85,60,154,0.1)">
+              <div class="brand-icon" style="background:#553c9a">Ca</div>
+              <span style="color:#553c9a">Caliquo</span>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tête interchangeable</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Matériau manche</td>
+          <td>Hêtre FSC + biopolymère</td>
+          <td>Bioplastique ricin 70% 🇫🇷</td>
+          <td>Aluminium 🇨🇳</td>
+          <td>Compatible Lamazuna</td>
+        </tr>
+        <tr>
+          <td>Fabrication France</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span> Manche</td>
+          <td><span class="cross" style="color:#ff3b30">✗</span> Chine</td>
+          <td><span class="partial">~</span> Partiel</td>
+        </tr>
+        <tr>
+          <td>Types de poils</td>
+          <td>Souple / Médium / Enfant / Senior</td>
+          <td>Extra-souple / Souple / Médium</td>
+          <td>Slim Soft / Charcoal / Deep Clean</td>
+          <td>Souple / Médium</td>
+        </tr>
+        <tr>
+          <td>Fréquence remplacement</td>
+          <td>Tous les 3 mois</td>
+          <td>Tous les 3 mois</td>
+          <td>Pack de 2 têtes inclus</td>
+          <td>Tous les 3 mois</td>
+        </tr>
+        <tr>
+          <td>Prix manche</td>
+          <td>Inclus abonnement</td>
+          <td>~5,90 €</td>
+          <td>~8–12 €</td>
+          <td>Compatible Lamazuna</td>
+        </tr>
+        <tr>
+          <td>Prix 3 têtes / lot</td>
+          <td>Dès 4,90€/mois</td>
+          <td>~6,32 €</td>
+          <td>Pack 2 inclus</td>
+          <td>~3–4 €</td>
+        </tr>
+        <tr>
+          <td>Recyclage têtes</td>
+          <td><span class="check">✓</span> Certifié · Freepost</td>
+          <td><span class="check">✓</span> Terracycle</td>
+          <td><span class="partial">~</span> Emballage recyclable</td>
+          <td><span class="cross" style="color:#ff3b30">✗</span> Non précisé</td>
+        </tr>
+        <tr>
+          <td>Abonnement</td>
+          <td><span class="check">✓</span> 3 formules</td>
+          <td><span class="cross" style="color:#ff3b30">✗</span></td>
+          <td><span class="cross" style="color:#ff3b30">✗</span></td>
+          <td><span class="cross" style="color:#ff3b30">✗</span></td>
+        </tr>
+        <tr>
+          <td>Offre enfants / seniors</td>
+          <td><span class="check">✓</span> Segmenté</td>
+          <td><span class="partial">~</span> Famille (non spécialisé)</td>
+          <td><span class="cross" style="color:#ff3b30">✗</span></td>
+          <td><span class="cross" style="color:#ff3b30">✗</span></td>
+        </tr>
+        <tr>
+          <td>Notoriété France</td>
+          <td>
+            <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:5%;background:var(--blue)"></div></div><span class="score-num">Lancement</span></div>
+          </td>
+          <td>
+            <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:45%;background:#276749"></div></div><span class="score-num">Moyenne</span></div>
+          </td>
+          <td>
+            <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:95%;background:#c05621"></div></div><span class="score-num">Très forte</span></div>
+          </td>
+          <td>
+            <div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:20%;background:#553c9a"></div></div><span class="score-num">Faible</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td>Santé financière</td>
+          <td><span class="partial">~</span> Démarrage</td>
+          <td><span class="cross" style="color:#ff3b30">✗</span> Redressement 2024</td>
+          <td><span class="check">✓</span> Leader mondial</td>
+          <td><span class="partial">~</span> Niche stable</td>
+        </tr>
+        <tr class="highlight-row">
+          <td>✦ Opportunité BFA</td>
+          <td colspan="4" style="color:var(--blue);font-size:12px;font-style:italic;">
+            Lamazuna fragilisée → Fenêtre pour capter sa clientèle. Colgate puissant mais pas éco-centré. Caliquo sans abonnement ni spécialisation. BFA se différencie : abonnement + segmentation seniors/enfants + certifications éco + Made in France.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:11px;color:var(--text-grey);margin-top:16px;text-align:center;font-style:italic">Sources : Lamazuna.com, Caliquo.com, Makeup.fr, Nuoobox.com, Colgate.com · 2024–2025</p>
+  </div>
+</section>
+
+<!-- SECTION 6 — DONNÉES MARCHÉ (ENHANCED) -->
+<section id="data">
+  <div class="data-header fade-up">
+    <h2 class="section-title">Un marché qui vous attend.</h2>
+    <p class="section-sub">France · 2025–2030 · Sources : NielsenIQ, Mordor Intelligence, Future Market Report</p>
+  </div>
+  <div class="stats-grid fade-up" style="transition-delay:.15s">
+    <div class="stat-card">
+      <div class="stat-val" data-target="288">0<span class="stat-unit">M€</span></div>
+      <div class="stat-label">Marché brosses GMS France</div>
+      <div class="stat-trend">↑ Oral care total : 1,5 Md€</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" data-target-float="4.2">0<span class="stat-unit">%</span></div>
+      <div class="stat-label">CAGR France 2025–2030</div>
+      <div class="stat-trend">↑ Croissance portée par l'éco-premium</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" data-negative="10.1">0<span class="stat-unit">%</span></div>
+      <div class="stat-label">Déclin brosse électrique avr. 2023–24</div>
+      <div class="stat-trend">→ Retour au manuel premium</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" data-target-float="6.1">0<span class="stat-unit">%</span></div>
+      <div class="stat-label">CAGR mondial 2025–2032</div>
+      <div class="stat-trend">↑ Marché mondial : 13,25 → 22,45 Mds$</div>
+    </div>
+  </div>
+
+  <!-- Deep dive market cards (from index_html) -->
+  <div class="market-deep-grid fade-up" style="transition-delay:.25s">
+    <div class="market-deep-card">
+      <div class="mdc-title">Marché brosse à dents France</div>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <span class="bar-label">Brosses</span>
+          <div class="bar-outer"><div class="bar-inner" style="width:100%;background:var(--blue)"><span class="bar-val">288 M€</span></div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Dentifrice</span>
+          <div class="bar-outer"><div class="bar-inner" style="width:100%;background:var(--green)"><span class="bar-val">592 M€</span></div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Hyg. buccale</span>
+          <div class="bar-outer"><div class="bar-inner" style="width:62%;background:#805ad5"><span class="bar-val">180 M€</span></div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Total bucco</span>
+          <div class="bar-outer"><div class="bar-inner" style="width:100%;background:#ff9500"><span class="bar-val">~1,06 Mds€</span></div></div>
+        </div>
+      </div>
+      <p class="mdc-source">Source : Made in FR / Études de marché 2024</p>
+    </div>
+
+    <div class="market-deep-card">
+      <div class="mdc-title">Marché mondial brosse à dents</div>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <span class="bar-label">2024</span>
+          <div class="bar-outer"><div class="bar-inner" style="width:59%;background:var(--blue)"><span class="bar-val">13,25 Mds $</span></div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">2032 (proj.)</span>
+          <div class="bar-outer"><div class="bar-inner" style="width:100%;background:var(--green)"><span class="bar-val">22,45 Mds $</span></div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">CAGR</span>
+          <div class="bar-outer"><div class="bar-inner" style="width:61%;background:#ff3b30"><span class="bar-val">+6,1% / an</span></div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Élec. CAGR</span>
+          <div class="bar-outer"><div class="bar-inner" style="width:82%;background:#ff9500"><span class="bar-val">+8,24% / an</span></div></div>
+        </div>
+      </div>
+      <p class="mdc-source">Sources : Future Market Report, MRFR 2025</p>
+    </div>
+
+    <div class="market-deep-card">
+      <div class="mdc-title">Leaders mondiaux (parts de marché)</div>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <span class="bar-label">Colgate</span>
+          <div class="bar-outer"><div class="bar-inner" style="width:100%;background:#c05621"><span class="bar-val">>25% mondial</span></div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Top 5</span>
+          <div class="bar-outer"><div class="bar-inner" style="width:57%;background:var(--text-grey)"><span class="bar-val">57% cumulés</span></div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Poils souples</span>
+          <div class="bar-outer"><div class="bar-inner" style="width:45%;background:var(--cyan)"><span class="bar-val">45% des ventes</span></div></div>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">E-com Europe</span>
+          <div class="bar-outer"><div class="bar-inner" style="width:48%;background:#805ad5"><span class="bar-val">48% dentifrice</span></div></div>
+        </div>
+      </div>
+      <p class="mdc-source">Sources : Global Market Insights, Data Bridge 2025</p>
+    </div>
+
+    <div class="market-deep-card">
+      <div class="mdc-title">Insights stratégiques BFA</div>
+      <ul class="insight-list">
+        <li>Le marché FR des brosses = <strong>288 M€</strong>, 2ᵉ segment hygiène bucco-dentaire.</li>
+        <li>Brosses électriques <strong>−10,1%</strong> en France → opportunité pour la manuelle éco.</li>
+        <li><strong>Lamazuna en redressement 2024</strong> → clientèle captable.</li>
+        <li>Colgate Keep sans <strong>abonnement ni positionnement éco</strong> fort en France.</li>
+        <li>E-commerce = <strong>canal prioritaire</strong> pour les petites marques (48% en Europe).</li>
+        <li>Poils souples = <strong>45% du marché</strong> mondial → gamme de base pour BFA.</li>
+        <li>Marché mondial <strong>+6,1%/an</strong> jusqu'en 2032 → fenêtre d'entrée favorable.</li>
+      </ul>
+      <p class="mdc-source">Analyse compilée · Sources diverses 2024–2025</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7 — PORTER -->
+<section id="porter">
+  <div class="porter-header fade-up">
+    <h2 class="section-title">Cinq forces.<br>Une position claire.</h2>
+    <p class="section-sub">Analyse Porter · Marché oral care éco-responsable France</p>
+  </div>
+  <div class="porter-grid">
+    <div class="porter-card fade-up intensity-mod">
+      <div class="porter-force">Force 1</div>
+      <div class="porter-name">Nouveaux entrants</div>
+      <div class="intensity-bar"><div class="intensity-fill"></div></div>
+      <div class="intensity-label">Modérée</div>
+      <div class="porter-implication">Barrières réglementaires (certifications éco) et coût d'acquisition limitent l'entrée. BFA consolide ses certifications françaises en avance de phase.</div>
+    </div>
+    <div class="porter-card fade-up intensity-mod" style="transition-delay:.05s">
+      <div class="porter-force">Force 2</div>
+      <div class="porter-name">Fournisseurs</div>
+      <div class="intensity-bar"><div class="intensity-fill"></div></div>
+      <div class="intensity-label">Modérée</div>
+      <div class="porter-implication">Filière bois française mature. Dépendance nylon recyclé à surveiller. Partenariats long-terme = levier de différenciation prix et traçabilité.</div>
+    </div>
+    <div class="porter-card fade-up intensity-vhigh" style="transition-delay:.1s">
+      <div class="porter-force">Force 3</div>
+      <div class="porter-name">Acheteurs</div>
+      <div class="intensity-bar"><div class="intensity-fill"></div></div>
+      <div class="intensity-label">Très élevée</div>
+      <div class="porter-implication">Consommateurs très sensibles au prix et aux alternatives. L'abonnement crée de la rétention et réduit le churn. Segmentation seniors/enfants = niches moins disputées.</div>
+    </div>
+    <div class="porter-card fade-up intensity-high" style="transition-delay:.15s">
+      <div class="porter-force">Force 4</div>
+      <div class="porter-name">Substituts</div>
+      <div class="intensity-bar"><div class="intensity-fill"></div></div>
+      <div class="intensity-label">Élevée</div>
+      <div class="porter-implication">Brosse électrique en recul (−10,1 %), bambou banalisé. BFA se positionne sur la durabilité fonctionnelle vs l'image seule.</div>
+    </div>
+    <div class="porter-card fade-up intensity-vhigh" style="transition-delay:.2s">
+      <div class="porter-force">Force 5</div>
+      <div class="porter-name">Rivalité</div>
+      <div class="intensity-bar"><div class="intensity-fill"></div></div>
+      <div class="intensity-label">Très élevée</div>
+      <div class="porter-implication">900.care (32M€ levés), Bioseptyl leader GMS, Caliquo fragilisé 2025. BFA : différenciation par le manche à vie + Made in France + recyclage certifié.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8 — CTA -->
+<section id="cta">
+  <p class="cta-title fade-up">Brush For<br><span class="cta-green">Always.</span></p>
+  <p class="cta-sub fade-up" style="transition-delay:.15s">La seule brosse que vous n'aurez besoin d'acheter qu'une fois.</p>
+  <button id="decouvrir-btn" class="cta-btn fade-up" style="transition-delay:.3s" onclick="openBFAModal()">
+    <span id="btn-label">Découvrir</span>
+    <span id="btn-icon" style="margin-left:8px;display:inline-block;transition:transform .3s">→</span>
+  </button>
+</section>
+
+<!-- ═══ MODAL BFA ═══ -->
+<div id="bfa-modal" aria-hidden="true">
+  <div id="modal-backdrop"></div>
+  <div id="modal-box">
+    <button id="modal-close" onclick="closeBFAModal()" aria-label="Fermer">✕</button>
+    <div id="modal-steps-bar">
+      <div class="mstep active" data-s="0">Formule</div>
+      <div class="mstep-line"></div>
+      <div class="mstep" data-s="1">Tête</div>
+      <div class="mstep-line"></div>
+      <div class="mstep" data-s="2">Confirmation</div>
+    </div>
+
+    <!-- STEP 0 — FORMULE -->
+    <div class="modal-screen active" id="ms-0">
+      <div class="ms-left">
+        <canvas id="modal-canvas"></canvas>
+        <div id="modal-brush-label"></div>
+      </div>
+      <div class="ms-right">
+        <p class="ms-tag">Votre abonnement BFA</p>
+        <h2 class="ms-title">Choisissez<br>votre formule.</h2>
+        <div class="formula-grid">
+          <label class="formula-card" data-plan="essentiel">
+            <input type="radio" name="plan" value="essentiel" checked>
+            <div class="fc-inner">
+              <div class="fc-name">Essentiel</div>
+              <div class="fc-price">4,90 <span>€/mois</span></div>
+              <div class="fc-desc">1 tête · 3 mois · Livraison incluse</div>
+            </div>
+          </label>
+          <label class="formula-card" data-plan="duo">
+            <input type="radio" name="plan" value="duo">
+            <div class="fc-inner">
+              <div class="fc-name">Duo</div>
+              <div class="fc-price">8,50 <span>€/mois</span></div>
+              <div class="fc-desc">2 têtes · Idéal famille</div>
+            </div>
+          </label>
+          <label class="formula-card best" data-plan="famille">
+            <div class="fc-badge">Populaire</div>
+            <input type="radio" name="plan" value="famille">
+            <div class="fc-inner">
+              <div class="fc-name">Famille+</div>
+              <div class="fc-price">14,90 <span>€/mois</span></div>
+              <div class="fc-desc">4 têtes · Seniors · Enfants · −20%</div>
+            </div>
+          </label>
+        </div>
+        <button class="ms-next" onclick="goStep(1)">Choisir ma tête <span>→</span></button>
+      </div>
+    </div>
+
+    <!-- STEP 1 — TÊTE -->
+    <div class="modal-screen" id="ms-1">
+      <div class="ms-left">
+        <canvas id="modal-canvas-2"></canvas>
+        <div id="head-preview-label"></div>
+      </div>
+      <div class="ms-right">
+        <p class="ms-tag">Personnalisation</p>
+        <h2 class="ms-title">Votre tête<br>idéale.</h2>
+        <div class="head-options">
+          <div class="head-opt active" data-h="soft" onclick="selectHead(this,'soft','Souple','#f2ede6')">
+            <div class="ho-swatch" style="background:#f2ede6;border:2px solid #ddd"></div>
+            <div class="ho-name">Souple</div>
+            <div class="ho-sub">Gencives sensibles</div>
+          </div>
+          <div class="head-opt" data-h="medium" onclick="selectHead(this,'medium','Médium','#e0d8ce')">
+            <div class="ho-swatch" style="background:#e0d8ce;border:2px solid #ddd"></div>
+            <div class="ho-name">Médium</div>
+            <div class="ho-sub">Usage quotidien</div>
+          </div>
+          <div class="head-opt" data-h="kids" onclick="selectHead(this,'kids','Enfant','#38c9f5')">
+            <div class="ho-swatch" style="background:#38c9f5"></div>
+            <div class="ho-name">Enfant</div>
+            <div class="ho-sub">3–12 ans · Tête mini</div>
+          </div>
+          <div class="head-opt" data-h="senior" onclick="selectHead(this,'senior','Senior','#22c98a')">
+            <div class="ho-swatch" style="background:#22c98a"></div>
+            <div class="ho-name">Senior</div>
+            <div class="ho-sub">Extra-souple · Prise renforcée</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:32px">
+          <button class="ms-back" onclick="goStep(0)">← Retour</button>
+          <button class="ms-next" onclick="goStep(2)">Valider <span>→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 — CONFIRMATION -->
+    <div class="modal-screen" id="ms-2">
+      <div class="confirm-center">
+        <div id="confirm-anim">
+          <svg id="confirm-ring" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(34,201,138,0.15)" stroke-width="4"/>
+            <circle id="confirm-arc" cx="50" cy="50" r="42" fill="none" stroke="var(--green)"
+              stroke-width="4" stroke-linecap="round"
+              stroke-dasharray="264" stroke-dashoffset="264"
+              transform="rotate(-90 50 50)"/>
+          </svg>
+          <div id="confirm-check">✓</div>
+        </div>
+        <h2 class="confirm-title">Votre BFA est prête.</h2>
+        <p class="confirm-sub" id="confirm-summary">Formule chargement...</p>
+        <div class="confirm-eco">
+          <span>♻ 96% moins de plastique sur 10 ans</span>
+          <span>🌿 Manche certifié FSC</span>
+          <span>🇫🇷 Made in France</span>
+        </div>
+        <button class="ms-next confirm-go" onclick="closeBFAModal()">Commencer mon aventure BFA</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PARTICLES CANVAS -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- FOOTER -->
+<footer>
+  <span>BFA · Brush For Always</span>
+  <span>2026 · Made in France · <span class="ft-green">♻</span></span>
+  <span>Sources : NielsenIQ · Mordor Intelligence · Fortune Business Insights · Future Market Report · Data Bridge</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ══════════════════════════════════
+// COMPARE TABS
+// ══════════════════════════════════
+function showCompareTab(id){
+  document.querySelectorAll('.compare-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.compare-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  // Re-trigger fade-up for newly visible elements
+  document.querySelectorAll('#'+id+' .fade-up').forEach(el=>{
+    el.classList.remove('visible');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('visible')));
+  });
+}
+
+// ══════════════════════════════════
+// NAV SCROLL
+// ══════════════════════════════════
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>10) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+},{passive:true});
+
+// ══════════════════════════════════
+// HERO THREE.JS
+// ══════════════════════════════════
+(function initHero(){
+  const canvas = document.getElementById('hero-canvas');
+  const renderer = new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.shadowMap.enabled=true;
+  renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.2;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45,1,0.1,100);
+  camera.position.set(0,0,5.5);
+
+  function resize(){
+    const w=canvas.clientWidth,h=canvas.clientHeight;
+    renderer.setSize(w,h,false);
+    camera.aspect=w/h;camera.updateProjectionMatrix();
+  }
+  resize();
+  new ResizeObserver(resize).observe(canvas);
+
+  scene.add(new THREE.AmbientLight(0xffffff,0.15));
+  const mainLight=new THREE.DirectionalLight(0xffffff,3.5);
+  mainLight.position.set(-3,5,3);mainLight.castShadow=true;scene.add(mainLight);
+  const rimLight=new THREE.DirectionalLight(0x38c9f5,1.5);
+  rimLight.position.set(3,-2,-3);scene.add(rimLight);
+  const fillLight=new THREE.DirectionalLight(0x22c98a,0.4);
+  fillLight.position.set(2,0,2);scene.add(fillLight);
+
+  const group=new THREE.Group();scene.add(group);
+
+  const handleGeo=new THREE.CylinderGeometry(0.12,0.15,2.4,32,1);
+  const handleMat=new THREE.MeshStandardMaterial({color:0xd4956a,roughness:0.55,metalness:0.02});
+  const handle=new THREE.Mesh(handleGeo,handleMat);
+  handle.position.y=-0.6;group.add(handle);
+
+  const gripGeo=new THREE.CylinderGeometry(0.145,0.145,0.7,32);
+  const gripMat=new THREE.MeshStandardMaterial({color:0x1558d6,roughness:0.4,metalness:0.1});
+  const grip=new THREE.Mesh(gripGeo,gripMat);
+  grip.position.y=0.2;group.add(grip);
+
+  for(let i=0;i<5;i++){
+    const rGeo=new THREE.TorusGeometry(0.148,0.015,8,32);
+    const rMat=new THREE.MeshStandardMaterial({color:0x0d3fa0,roughness:0.5});
+    const r=new THREE.Mesh(rGeo,rMat);
+    r.rotation.x=Math.PI/2;r.position.y=0.0+i*0.12-0.24;group.add(r);
+  }
+
+  const jointGeo=new THREE.TorusGeometry(0.16,0.025,12,64);
+  const jointMat=new THREE.MeshStandardMaterial({color:0x22c98a,roughness:0.2,metalness:0.3,emissive:0x22c98a,emissiveIntensity:0.3});
+  const joint=new THREE.Mesh(jointGeo,jointMat);
+  joint.rotation.x=Math.PI/2;joint.position.y=0.72;group.add(joint);
+
+  const neckGeo=new THREE.CylinderGeometry(0.1,0.13,0.3,32);
+  const neck=new THREE.Mesh(neckGeo,new THREE.MeshStandardMaterial({color:0xe8ddd0,roughness:0.5}));
+  neck.position.y=0.95;group.add(neck);
+
+  const headGeo=new THREE.BoxGeometry(0.28,0.6,0.12);
+  headGeo.translate(0,0.3,0);
+  const headMat=new THREE.MeshStandardMaterial({color:0xf2ede6,roughness:0.4,metalness:0.05});
+  const head=new THREE.Mesh(headGeo,headMat);
+  head.position.y=1.2;group.add(head);
+
+  const bristleGeo=new THREE.CylinderGeometry(0.006,0.004,0.14,4);
+  const bristleMat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.9});
+  const bristleCyanMat=new THREE.MeshStandardMaterial({color:0x38c9f5,roughness:0.9});
+  for(let r=0;r<4;r++){
+    for(let c=0;c<6;c++){
+      const mat=(c===2||c===3)?bristleCyanMat:bristleMat;
+      const b=new THREE.Mesh(bristleGeo,mat);
+      b.position.set(-0.09+r*0.06,-0.02+c*0.065+1.38,0.08);group.add(b);
+    }
+  }
+  group.rotation.z=0.08;
+
+  let isDragging=false,prevMouse={x:0,y:0};
+  canvas.addEventListener('mousedown',e=>{isDragging=true;prevMouse={x:e.clientX,y:e.clientY}});
+  window.addEventListener('mouseup',()=>isDragging=false);
+  window.addEventListener('mousemove',e=>{
+    if(!isDragging)return;
+    const dx=e.clientX-prevMouse.x,dy=e.clientY-prevMouse.y;
+    group.rotation.y+=dx*0.01;group.rotation.x+=dy*0.01;
+    prevMouse={x:e.clientX,y:e.clientY};
+  });
+
+  let t=0;
+  function animate(){
+    requestAnimationFrame(animate);t+=0.01;
+    if(!isDragging) group.rotation.y=Math.sin(t*0.4)*0.3;
+    joint.material.emissiveIntensity=0.2+Math.sin(t*2)*0.15;
+    renderer.render(scene,camera);
+  }
+  animate();
+  setTimeout(()=>document.getElementById('hero-content').classList.add('hero-loaded'),100);
+  window._heroScene={group,joint,handle,grip,neck,head};
+})();
+
+// ══════════════════════════════════
+// PRODUCT THREE.JS (sticky)
+// ══════════════════════════════════
+(function initProduct(){
+  const canvas=document.getElementById('product-canvas');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(42,1,0.1,100);
+  camera.position.set(0,0,5.5);
+  function resize(){
+    const w=canvas.clientWidth,h=canvas.clientHeight;
+    renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+  }
+  resize();new ResizeObserver(resize).observe(canvas);
+  scene.add(new THREE.AmbientLight(0xffffff,0.2));
+  const mainL=new THREE.DirectionalLight(0xffffff,3);mainL.position.set(-3,5,3);scene.add(mainL);
+  const rimL=new THREE.DirectionalLight(0x38c9f5,1.2);rimL.position.set(3,-2,-3);scene.add(rimL);
+
+  const spotHandle=new THREE.SpotLight(0xd4956a,0,8,0.6,0.5);spotHandle.position.set(2,-1,3);scene.add(spotHandle);
+  const spotGrip=new THREE.SpotLight(0x1558d6,0,8,0.6,0.5);spotGrip.position.set(-2,0,3);scene.add(spotGrip);
+  const spotJoint=new THREE.SpotLight(0x22c98a,0,6,0.8,0.5);spotJoint.position.set(0,1,3);scene.add(spotJoint);
+  const spotHead=new THREE.SpotLight(0x38c9f5,0,6,0.5,0.5);spotHead.position.set(1,4,3);scene.add(spotHead);
+
+  const group=new THREE.Group();scene.add(group);
+  const handleMat=new THREE.MeshStandardMaterial({color:0xd4956a,roughness:0.55,metalness:0.02});
+  const handle=new THREE.Mesh(new THREE.CylinderGeometry(0.12,0.15,2.4,32),handleMat);
+  handle.position.y=-0.6;group.add(handle);
+  const gripMat=new THREE.MeshStandardMaterial({color:0x1558d6,roughness:0.4,metalness:0.1});
+  const grip=new THREE.Mesh(new THREE.CylinderGeometry(0.145,0.145,0.7,32),gripMat);
+  grip.position.y=0.2;group.add(grip);
+  for(let i=0;i<5;i++){
+    const r=new THREE.Mesh(new THREE.TorusGeometry(0.148,0.015,8,32),new THREE.MeshStandardMaterial({color:0x0d3fa0,roughness:0.5}));
+    r.rotation.x=Math.PI/2;r.position.y=i*0.12-0.24;group.add(r);
+  }
+  const jointMat=new THREE.MeshStandardMaterial({color:0x22c98a,roughness:0.2,metalness:0.3,emissive:0x22c98a,emissiveIntensity:0.2});
+  const joint=new THREE.Mesh(new THREE.TorusGeometry(0.16,0.025,12,64),jointMat);
+  joint.rotation.x=Math.PI/2;joint.position.y=0.72;group.add(joint);
+  const neck=new THREE.Mesh(new THREE.CylinderGeometry(0.1,0.13,0.3,32),new THREE.MeshStandardMaterial({color:0xe8ddd0,roughness:0.5}));
+  neck.position.y=0.95;group.add(neck);
+  const headGeo=new THREE.BoxGeometry(0.28,0.6,0.12);headGeo.translate(0,0.3,0);
+  const head=new THREE.Mesh(headGeo,new THREE.MeshStandardMaterial({color:0xf2ede6,roughness:0.4,metalness:0.05}));
+  head.position.y=1.2;group.add(head);
+  for(let r=0;r<4;r++){
+    for(let c=0;c<6;c++){
+      const mat=(c===2||c===3)?new THREE.MeshStandardMaterial({color:0x38c9f5,roughness:0.9}):new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.9});
+      const b=new THREE.Mesh(new THREE.CylinderGeometry(0.006,0.004,0.14,4),mat);
+      b.position.set(-0.09+r*0.06,-0.02+c*0.065+1.38,0.08);group.add(b);
+    }
+  }
+  group.rotation.z=0.06;group.rotation.y=-0.2;
+
+  const spots=[spotHandle,spotGrip,spotJoint,spotHead];
+  let currentStep=0,t=0;
+  function setStep(s){
+    currentStep=s;spots.forEach(sp=>sp.intensity=0);
+    if(s===0)spotHandle.intensity=2.5;
+    if(s===1)spotGrip.intensity=2.5;
+    if(s===2){spotJoint.intensity=3;jointMat.emissiveIntensity=0.6;}else{jointMat.emissiveIntensity=0.2;}
+    if(s===3)spotHead.intensity=2.5;
+  }
+  const steps=document.querySelectorAll('.product-step');
+  const stepObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        setStep(parseInt(e.target.dataset.step)||0);
+        e.target.classList.add('visible');
+      }
+    });
+  },{threshold:0.5,rootMargin:'-20% 0px -20% 0px'});
+  steps.forEach(s=>stepObs.observe(s));
+  function animate(){
+    requestAnimationFrame(animate);t+=0.012;
+    group.rotation.y=Math.sin(t*0.3)*0.15-0.2;
+    if(currentStep===2)jointMat.emissiveIntensity=0.4+Math.sin(t*3)*0.3;
+    renderer.render(scene,camera);
+  }
+  animate();setStep(0);
+})();
+
+// ══════════════════════════════════
+// INTERSECTION OBSERVER — FADE UP
+// ══════════════════════════════════
+const fadeObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.15});
+document.querySelectorAll('.fade-up').forEach(el=>fadeObs.observe(el));
+
+// ══════════════════════════════════
+// COUNTER ANIMATION
+// ══════════════════════════════════
+const counterEl=document.getElementById('counter');
+let counted=false;
+const counterObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting&&!counted){
+    counted=true;
+    document.querySelectorAll('#stat .fade-up').forEach(el=>el.classList.add('visible'));
+    let start=0,end=80,dur=1800,startTime=null;
+    function step(ts){
+      if(!startTime)startTime=ts;
+      const p=Math.min((ts-startTime)/dur,1);
+      counterEl.textContent=Math.round((1-Math.pow(1-p,3))*end);
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+},{threshold:0.4});
+counterObs.observe(document.getElementById('stat'));
+
+// ══════════════════════════════════
+// STAT CARDS COUNTER
+// ══════════════════════════════════
+const statObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.querySelectorAll('.stat-val').forEach(card=>{
+      const t=card.getAttribute('data-target');
+      const tf=card.getAttribute('data-target-float');
+      const tn=card.getAttribute('data-negative');
+      if(!t&&!tf&&!tn)return;
+      const unit=card.querySelector('.stat-unit')?.outerHTML||'';
+      const end=t?parseInt(t):tf?parseFloat(tf):parseFloat(tn);
+      const neg=!!tn;
+      let start=null,dur=1600;
+      function step(ts){
+        if(!start)start=ts;
+        const p=Math.min((ts-start)/dur,1);
+        const ease=1-Math.pow(1-p,3);
+        const val=ease*end;
+        card.innerHTML=(neg?'−':'')+(tf||tn?val.toFixed(1):Math.round(val))+unit;
+        if(p<1)requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+    statObs.unobserve(e.target);
+  });
+},{threshold:0.3});
+const dataSection=document.getElementById('data');
+if(dataSection)statObs.observe(dataSection);
+
+// ══════════════════════════════════
+// PORTER CARDS FADE
+// ══════════════════════════════════
+const porterObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.2});
+document.querySelectorAll('.porter-card').forEach(c=>porterObs.observe(c));
+
+// ══════════════════════════════════
+// PARTICLES BURST
+// ══════════════════════════════════
+(function initParticles(){
+  const pc=document.getElementById('particles-canvas');
+  const ctx=pc.getContext('2d');
+  let particles=[],animId=null;
+  function resize(){pc.width=window.innerWidth;pc.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+  function spawnBurst(ox,oy){
+    const colors=['#22c98a','#38c9f5','#1558d6','#ffffff','#d4956a'];
+    for(let i=0;i<120;i++){
+      const angle=Math.random()*Math.PI*2;
+      const speed=2+Math.random()*8;
+      const size=2+Math.random()*6;
+      particles.push({
+        x:ox,y:oy,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed-4,
+        size,color:colors[Math.floor(Math.random()*colors.length)],
+        alpha:1,rot:Math.random()*Math.PI*2,rotV:(Math.random()-.5)*0.2,
+        shape:Math.random()<0.5?'circle':'rect',gravity:0.18+Math.random()*0.1,life:1
+      });
+    }
+  }
+  function tick(){
+    ctx.clearRect(0,0,pc.width,pc.height);
+    particles=particles.filter(p=>p.alpha>0.01);
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.vy+=p.gravity;p.vx*=0.98;p.alpha-=0.018;p.rot+=p.rotV;
+      ctx.save();ctx.globalAlpha=Math.max(0,p.alpha);ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=p.color;
+      if(p.shape==='circle'){ctx.beginPath();ctx.arc(0,0,p.size/2,0,Math.PI*2);ctx.fill();}
+      else{ctx.fillRect(-p.size/2,-p.size/4,p.size,p.size/2);}
+      ctx.restore();
+    });
+    if(particles.length>0)animId=requestAnimationFrame(tick);
+    else{pc.classList.remove('active');cancelAnimationFrame(animId);}
+  }
+  window.triggerParticles=function(el){
+    const r=el.getBoundingClientRect();
+    pc.classList.add('active');spawnBurst(r.left+r.width/2,r.top+r.height/2);
+    cancelAnimationFrame(animId);animId=requestAnimationFrame(tick);
+  };
+})();
+
+// ══════════════════════════════════
+// MODAL LOGIC
+// ══════════════════════════════════
+let currentModalStep=0;
+let selectedHead={name:'Souple',color:'#f2ede6'};
+let selectedPlan='essentiel';
+
+window.openBFAModal=function(){
+  const btn=document.getElementById('decouvrir-btn');
+  triggerParticles(btn);
+  btn.style.transform='scale(0.95)';
+  document.getElementById('btn-label').textContent='Un instant…';
+  document.getElementById('btn-icon').style.transform='rotate(90deg)';
+  setTimeout(()=>{btn.style.transform='';},200);
+  setTimeout(()=>{
+    document.getElementById('bfa-modal').classList.add('open');
+    document.getElementById('bfa-modal').setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    document.getElementById('btn-label').textContent='Découvrir';
+    document.getElementById('btn-icon').style.transform='';
+    goStep(0);initModalCanvas();initModalCanvas2();
+  },400);
+};
+
+window.closeBFAModal=function(){
+  document.getElementById('bfa-modal').classList.remove('open');
+  document.getElementById('bfa-modal').setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+};
+
+document.getElementById('modal-backdrop').addEventListener('click',closeBFAModal);
+
+window.goStep=function(s){
+  currentModalStep=s;
+  document.querySelectorAll('.modal-screen').forEach((el,i)=>el.classList.toggle('active',i===s));
+  document.querySelectorAll('.mstep').forEach((el,i)=>el.classList.toggle('active',i===s));
+  if(s===2)startConfirmAnim();
+};
+
+window.selectHead=function(el,key,name,color){
+  document.querySelectorAll('.head-opt').forEach(o=>o.classList.remove('active'));
+  el.classList.add('active');selectedHead={name,color};updateHeadPreview(color,name);
+};
+
+document.querySelectorAll('input[name="plan"]').forEach(inp=>{
+  inp.addEventListener('change',()=>{selectedPlan=inp.value;});
+});
+
+function planLabel(){
+  const map={essentiel:'Essentiel · 4,90€/mois',duo:'Duo · 8,50€/mois',famille:'Famille+ · 14,90€/mois'};
+  return map[selectedPlan]||'Essentiel';
+}
+
+function startConfirmAnim(){
+  const arc=document.getElementById('confirm-arc');
+  const anim=document.getElementById('confirm-anim');
+  arc.style.strokeDashoffset='264';anim.classList.remove('done');
+  document.getElementById('confirm-summary').textContent=
+    `${planLabel()} · Tête ${selectedHead.name} · Livraison offerte · Manche à vie inclus`;
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      arc.style.strokeDashoffset='0';
+      setTimeout(()=>anim.classList.add('done'),900);
+    });
+  });
+}
+
+// ── MODAL THREE.JS — BROSSE STEP 0 ──
+let modalR1=null;
+function initModalCanvas(){
+  if(modalR1)return;
+  const canvas=document.getElementById('modal-canvas');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.2;
+  const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(42,1,0.1,100);
+  camera.position.set(0,0,5.5);
+  function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+  resize();new ResizeObserver(resize).observe(canvas);
+  scene.add(new THREE.AmbientLight(0xffffff,0.25));
+  const ml=new THREE.DirectionalLight(0xffffff,3);ml.position.set(-2,4,3);scene.add(ml);
+  const rl=new THREE.DirectionalLight(0x38c9f5,1.2);rl.position.set(3,-2,-2);scene.add(rl);
+  const grp=new THREE.Group();scene.add(grp);
+  grp.add(Object.assign(new THREE.Mesh(new THREE.CylinderGeometry(0.12,0.15,2.4,32),new THREE.MeshStandardMaterial({color:0xd4956a,roughness:0.55,metalness:0.02})),{position:{x:0,y:-0.6,z:0}}));
+  grp.add(Object.assign(new THREE.Mesh(new THREE.CylinderGeometry(0.145,0.145,0.7,32),new THREE.MeshStandardMaterial({color:0x1558d6,roughness:0.4,metalness:0.1})),{position:{x:0,y:0.2,z:0}}));
+  const jm=new THREE.MeshStandardMaterial({color:0x22c98a,roughness:0.2,emissive:0x22c98a,emissiveIntensity:0.3});
+  const jt=new THREE.Mesh(new THREE.TorusGeometry(0.16,0.025,12,64),jm);jt.rotation.x=Math.PI/2;jt.position.y=0.72;grp.add(jt);
+  const hGeo=new THREE.BoxGeometry(0.28,0.6,0.12);hGeo.translate(0,0.3,0);
+  grp.add(Object.assign(new THREE.Mesh(hGeo,new THREE.MeshStandardMaterial({color:0xf2ede6,roughness:0.4})),{position:{x:0,y:1.2,z:0}}));
+  for(let r=0;r<4;r++)for(let c=0;c<6;c++){
+    const b=new THREE.Mesh(new THREE.CylinderGeometry(0.006,0.004,0.14,4),new THREE.MeshStandardMaterial({color:(c===2||c===3)?0x38c9f5:0xffffff,roughness:0.9}));
+    b.position.set(-0.09+r*0.06,-0.02+c*0.065+1.38,0.08);grp.add(b);
+  }
+  grp.rotation.z=0.08;
+  const planLight=new THREE.PointLight(0x22c98a,0,4);scene.add(planLight);
+  let pt=0;
+  function updatePlanLight(){
+    const p=document.querySelector('input[name="plan"]:checked')?.value||'essentiel';
+    planLight.color.set(p==='famille'?0x22c98a:p==='duo'?0x38c9f5:0x1558d6);
+    planLight.position.set(Math.sin(pt)*2,1,2);planLight.intensity=1.5+Math.sin(pt*2)*0.5;
+  }
+  function anim(){requestAnimationFrame(anim);pt+=0.02;grp.rotation.y=Math.sin(pt*0.5)*0.4;jt.material.emissiveIntensity=0.2+Math.sin(pt*3)*0.15;updatePlanLight();renderer.render(scene,camera);}
+  anim();modalR1=true;
+  document.getElementById('modal-brush-label').textContent='Votre manche · À vie';
+}
+
+// ── MODAL THREE.JS — TÊTE STEP 1 ──
+let modalHeadMat=null,modalR2=null;
+function initModalCanvas2(){
+  if(modalR2)return;
+  const canvas=document.getElementById('modal-canvas-2');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+  const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(42,1,0.1,100);
+  camera.position.set(0,0,4);
+  function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+  resize();new ResizeObserver(resize).observe(canvas);
+  scene.add(new THREE.AmbientLight(0xffffff,0.3));
+  const ml=new THREE.DirectionalLight(0xffffff,3.5);ml.position.set(-2,5,3);scene.add(ml);
+  const hl=new THREE.DirectionalLight(0x38c9f5,1);hl.position.set(3,0,-2);scene.add(hl);
+  const grp=new THREE.Group();scene.add(grp);
+  grp.add(Object.assign(new THREE.Mesh(new THREE.CylinderGeometry(0.1,0.13,0.5,32),new THREE.MeshStandardMaterial({color:0xe8ddd0,roughness:0.5})),{position:{x:0,y:-0.6,z:0}}));
+  const hGeo2=new THREE.BoxGeometry(0.32,0.7,0.14);hGeo2.translate(0,0.35,0);
+  modalHeadMat=new THREE.MeshStandardMaterial({color:0xf2ede6,roughness:0.35,metalness:0.05});
+  const hMesh=new THREE.Mesh(hGeo2,modalHeadMat);hMesh.position.y=-0.3;grp.add(hMesh);
+  for(let r=0;r<4;r++)for(let c=0;c<7;c++){
+    const b=new THREE.Mesh(new THREE.CylinderGeometry(0.007,0.005,0.18,4),new THREE.MeshStandardMaterial({color:(c===3||c===4)?0x38c9f5:0xffffff,roughness:0.9}));
+    b.position.set(-0.1+r*0.07,0.08+c*0.075,0.1);grp.add(b);
+  }
+  grp.rotation.z=0.05;
+  let pt2=0;
+  function anim2(){requestAnimationFrame(anim2);pt2+=0.02;grp.rotation.y=Math.sin(pt2*0.4)*0.5;renderer.render(scene,camera);}
+  anim2();modalR2=true;
+  document.getElementById('head-preview-label').textContent='Tête · '+selectedHead.name;
+}
+
+window.updateHeadPreview=function(color,name){
+  if(modalHeadMat)modalHeadMat.color=new THREE.Color(color);
+  const lbl=document.getElementById('head-preview-label');
+  if(lbl)lbl.textContent='Tête · '+name;
+};
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBFAModal()});
+</script>
 </body>
 </html>
