@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brush For Always — La brosse. Pour toujours.</title>
-<link rel="stylesheet" href="chatbot/styles.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -1721,6 +1720,397 @@ footer .ft-green{color:var(--green)}
 <!-- PARTICLES CANVAS -->
 <canvas id="particles-canvas"></canvas>
 
+<!-- ═══ CHATBOT BFA ═══ -->
+<style>
+/* ── CHAT BUBBLE ── */
+#bfa-chat-btn {
+  position: fixed; bottom: 32px; right: 32px; z-index: 9990;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--black); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+  font-size: 22px;
+}
+#bfa-chat-btn:hover { transform: scale(1.1); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+#bfa-chat-btn .chat-dot {
+  position: absolute; top: 10px; right: 10px;
+  width: 10px; height: 10px; border-radius: 50%; background: var(--green);
+  border: 2px solid var(--black);
+  animation: chatPulse 2s infinite;
+}
+@keyframes chatPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
+
+/* ── CHAT WINDOW ── */
+#bfa-chat-win {
+  position: fixed; bottom: 100px; right: 32px; z-index: 9991;
+  width: min(400px, calc(100vw - 48px));
+  background: var(--white);
+  border-radius: 24px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06);
+  display: flex; flex-direction: column; overflow: hidden;
+  transform: scale(0.88) translateY(24px); opacity: 0;
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1), opacity .3s ease;
+  pointer-events: none;
+  max-height: min(560px, calc(100vh - 140px));
+}
+#bfa-chat-win.open {
+  transform: scale(1) translateY(0); opacity: 1; pointer-events: all;
+}
+
+/* ── CHAT HEADER ── */
+.chat-header {
+  padding: 18px 20px 16px;
+  background: var(--black);
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0;
+}
+.chat-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), var(--cyan));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.chat-header-info { flex: 1 }
+.chat-header-name { font-size: 14px; font-weight: 700; color: var(--white); }
+.chat-header-status { font-size: 11px; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 5px; }
+.chat-status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+.chat-close-btn {
+  background: rgba(255,255,255,0.1); border: none; width: 28px; height: 28px;
+  border-radius: 50%; cursor: pointer; color: rgba(255,255,255,0.6);
+  font-size: 12px; display: flex; align-items: center; justify-content: center;
+  transition: background .2s; flex-shrink: 0;
+}
+.chat-close-btn:hover { background: rgba(255,255,255,0.2); }
+
+/* ── CHAT MESSAGES ── */
+#chat-messages {
+  flex: 1; overflow-y: auto; padding: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  scroll-behavior: smooth;
+}
+#chat-messages::-webkit-scrollbar { width: 4px; }
+#chat-messages::-webkit-scrollbar-track { background: transparent; }
+#chat-messages::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 2px; }
+
+.chat-msg {
+  display: flex; gap: 8px; align-items: flex-end;
+  animation: msgIn .3s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes msgIn { from { opacity:0; transform:translateY(8px) scale(0.95); } to { opacity:1; transform:none; } }
+.chat-msg.user { flex-direction: row-reverse; }
+
+.chat-bubble {
+  max-width: 78%; padding: 10px 14px;
+  border-radius: 16px; font-size: 13.5px; line-height: 1.55;
+  word-break: break-word;
+}
+.chat-msg.bot .chat-bubble {
+  background: var(--grey); color: var(--black);
+  border-bottom-left-radius: 4px;
+}
+.chat-msg.user .chat-bubble {
+  background: var(--black); color: var(--white);
+  border-bottom-right-radius: 4px;
+}
+.chat-msg-avatar {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--green), var(--cyan));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+}
+
+/* Typing indicator */
+.typing-bubble {
+  display: flex; align-items: center; gap: 4px; padding: 12px 16px;
+}
+.typing-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--text-grey);
+  animation: typingBounce .9s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: .15s; }
+.typing-dot:nth-child(3) { animation-delay: .3s; }
+@keyframes typingBounce { 0%,60%,100%{transform:none} 30%{transform:translateY(-5px)} }
+
+/* ── QUICK REPLIES ── */
+.chat-quick-replies {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 10px;
+  flex-shrink: 0;
+}
+.quick-reply-btn {
+  font-size: 12px; font-weight: 500; padding: 6px 12px;
+  border-radius: 980px; border: 1.5px solid rgba(0,0,0,0.1);
+  background: transparent; color: var(--text-grey);
+  cursor: pointer; font-family: var(--font);
+  transition: all .2s; white-space: nowrap;
+}
+.quick-reply-btn:hover {
+  border-color: var(--black); color: var(--black); background: var(--grey);
+}
+
+/* ── CHAT INPUT ── */
+.chat-input-wrap {
+  padding: 12px 16px 14px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+}
+#chat-input {
+  flex: 1; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 12px;
+  padding: 10px 14px; font-size: 13px; font-family: var(--font);
+  color: var(--black); background: var(--grey);
+  outline: none; resize: none; line-height: 1.4;
+  transition: border-color .2s; max-height: 80px; overflow-y: auto;
+}
+#chat-input:focus { border-color: var(--green); background: var(--white); }
+#chat-send-btn {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  background: var(--black); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, transform .2s;
+  font-size: 14px; color: white;
+}
+#chat-send-btn:hover { background: #3a3a3c; transform: scale(1.05); }
+#chat-send-btn:disabled { background: rgba(0,0,0,0.15); cursor: default; transform: none; }
+</style>
+
+<!-- Chat trigger button -->
+<button id="bfa-chat-btn" onclick="toggleBFAChat()" aria-label="Ouvrir l'assistant BFA">
+  🪥
+  <span class="chat-dot"></span>
+</button>
+
+<!-- Chat window -->
+<div id="bfa-chat-win" role="dialog" aria-label="Assistant BFA">
+  <div class="chat-header">
+    <div class="chat-avatar">🤖</div>
+    <div class="chat-header-info">
+      <div class="chat-header-name">Assistant BFA</div>
+      <div class="chat-header-status">
+        <span class="chat-status-dot"></span>
+        <span>En ligne · IA spécialisée BFA</span>
+      </div>
+    </div>
+    <button class="chat-close-btn" onclick="toggleBFAChat()">✕</button>
+  </div>
+
+  <div id="chat-messages"></div>
+
+  <div class="chat-quick-replies" id="chat-quick-replies">
+    <button class="quick-reply-btn" onclick="sendQuickReply('Comment fonctionne l\'abonnement ?')">Abonnement 💳</button>
+    <button class="quick-reply-btn" onclick="sendQuickReply('Quel est l\'impact écologique de BFA ?')">Écologie 🌿</button>
+    <button class="quick-reply-btn" onclick="sendQuickReply('Quelle tête de brosse choisir ?')">Choisir une tête 🪥</button>
+    <button class="quick-reply-btn" onclick="sendQuickReply('Est-ce vraiment Made in France ?')">Made in France 🇫🇷</button>
+  </div>
+
+  <div class="chat-input-wrap">
+    <textarea id="chat-input" placeholder="Posez votre question à BFA…" rows="1"
+      onkeydown="handleChatKey(event)" oninput="autoResizeTextarea(this)"></textarea>
+    <button id="chat-send-btn" onclick="sendChatMessage()" aria-label="Envoyer">↑</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════
+// CHATBOT BFA
+// ══════════════════════════════════
+(function() {
+  var chatOpen = false;
+  var chatHistory = [];
+  var isTyping = false;
+
+  var BFA_SYSTEM = `Tu es l'assistant virtuel de Brush For Always (BFA), une marque française de brosses à dents éco-responsables. Réponds en français, de façon concise, friendly et experte. Voici les infos clés sur BFA :
+
+PRODUIT :
+- Manche en hêtre français certifié FSC, conçu pour durer toute une vie
+- Tête interchangeable en nylon recyclé, à changer tous les 3 mois
+- Connexion magnétique via un joint en biopolymère certifié (un clic pour fixer/libérer)
+- 5 rangées × 9 touffes de poils, densité clinique premium
+- −96% de plastique vs une brosse classique sur 10 ans
+- Made in France à 100% (manche, assemblage, recyclage)
+- Recyclage certifié avec retour freepost inclus dans l'abonnement
+
+GAMMES DE TÊTES :
+- Souple : gencives sensibles
+- Médium : usage quotidien
+- Enfant : 3–12 ans, tête mini
+- Senior : extra-souple, prise renforcée
+
+ABONNEMENTS :
+- Essentiel : 4,90€/mois — 1 tête par trimestre, livraison incluse
+- Duo : 8,50€/mois — 2 têtes, idéal pour les couples
+- Famille+ : 14,90€/mois — 4 têtes (seniors + enfants), −20%, la formule la plus populaire
+- Tous sans engagement, pause/annulation en 2 clics
+
+MARCHÉ :
+- Marché brosse GMS France : 288 M€, CAGR 4,2% jusqu'en 2030
+- Lamazuna en redressement judiciaire 2024 → opportunité de marché
+- Colgate Keep sans abonnement, pas éco-centré
+- 900.care (32M€ levés) mais hors France
+
+AVANTAGES CONCURRENTIELS :
+- Seule brosse avec manche à vie + abonnement tête + recyclage certifié + Made in France
+- Segmentation unique : seniors ET enfants
+- Score NPS 78 · Validé par 200+ testeurs
+
+Réponds de façon courte et directe (2–4 phrases max), utilise des emojis avec parcimonie. Tu peux orienter vers les sections du site si pertinent (ex: "Consultez notre comparatif").`;
+
+  window.toggleBFAChat = function() {
+    chatOpen = !chatOpen;
+    var win = document.getElementById('bfa-chat-win');
+    if (chatOpen) {
+      win.classList.add('open');
+      if (chatHistory.length === 0) {
+        setTimeout(function() {
+          addBotMessage('Bonjour ! Je suis l\'assistant BFA 🪥\nComment puis-je vous aider ? Abonnement, impact écologique, choix de tête…');
+        }, 300);
+      }
+      setTimeout(function() {
+        document.getElementById('chat-input').focus();
+      }, 400);
+    } else {
+      win.classList.remove('open');
+    }
+  };
+
+  window.sendQuickReply = function(text) {
+    var qr = document.getElementById('chat-quick-replies');
+    qr.style.display = 'none';
+    sendMessage(text);
+  };
+
+  window.handleChatKey = function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendChatMessage();
+    }
+  };
+
+  window.autoResizeTextarea = function(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 80) + 'px';
+  };
+
+  window.sendChatMessage = function() {
+    var input = document.getElementById('chat-input');
+    var text = input.value.trim();
+    if (!text || isTyping) return;
+    input.value = '';
+    input.style.height = 'auto';
+    sendMessage(text);
+  };
+
+  function sendMessage(text) {
+    addUserMessage(text);
+    chatHistory.push({ role: 'user', content: text });
+    showTyping();
+    callClaudeAPI();
+  }
+
+  function addUserMessage(text) {
+    var msgs = document.getElementById('chat-messages');
+    var div = document.createElement('div');
+    div.className = 'chat-msg user';
+    div.innerHTML = '<div class="chat-bubble">' + escapeHtml(text) + '</div>';
+    msgs.appendChild(div);
+    scrollToBottom();
+  }
+
+  function addBotMessage(text) {
+    var msgs = document.getElementById('chat-messages');
+    var typing = msgs.querySelector('.typing-indicator');
+    if (typing) typing.remove();
+
+    var div = document.createElement('div');
+    div.className = 'chat-msg bot';
+    div.innerHTML =
+      '<div class="chat-msg-avatar">🤖</div>' +
+      '<div class="chat-bubble">' + formatBotText(text) + '</div>';
+    msgs.appendChild(div);
+    scrollToBottom();
+  }
+
+  function showTyping() {
+    isTyping = true;
+    document.getElementById('chat-send-btn').disabled = true;
+    var msgs = document.getElementById('chat-messages');
+    var div = document.createElement('div');
+    div.className = 'chat-msg bot typing-indicator';
+    div.innerHTML =
+      '<div class="chat-msg-avatar">🤖</div>' +
+      '<div class="chat-bubble"><div class="typing-bubble">' +
+        '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>' +
+      '</div></div>';
+    msgs.appendChild(div);
+    scrollToBottom();
+  }
+
+  function hideTyping() {
+    isTyping = false;
+    document.getElementById('chat-send-btn').disabled = false;
+    var typing = document.getElementById('chat-messages').querySelector('.typing-indicator');
+    if (typing) typing.remove();
+  }
+
+  async function callClaudeAPI() {
+    try {
+      var messages = chatHistory.map(function(m) {
+        return { role: m.role, content: m.content };
+      });
+
+      var response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: BFA_SYSTEM,
+          messages: messages
+        })
+      });
+
+      var data = await response.json();
+      var replyText = '';
+      if (data.content && data.content.length > 0) {
+        data.content.forEach(function(block) {
+          if (block.type === 'text') replyText += block.text;
+        });
+      } else {
+        replyText = 'Désolé, je rencontre une difficulté technique. Réessayez dans un instant.';
+      }
+
+      hideTyping();
+      addBotMessage(replyText);
+      chatHistory.push({ role: 'assistant', content: replyText });
+
+    } catch (err) {
+      hideTyping();
+      addBotMessage('Oups, une erreur réseau s\'est produite 😔 Vérifiez votre connexion et réessayez.');
+    }
+  }
+
+  function formatBotText(text) {
+    return escapeHtml(text)
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/\n/g, '<br>')
+      .replace(/^(.*)$/, '<p>$1</p>');
+  }
+
+  function escapeHtml(text) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function scrollToBottom() {
+    var msgs = document.getElementById('chat-messages');
+    setTimeout(function() { msgs.scrollTop = msgs.scrollHeight; }, 50);
+  }
+})();
+</script>
+
 <!-- FOOTER -->
 <footer>
   <span>BFA · Brush For Always</span>
@@ -2693,10 +3083,5 @@ window.updateBFAPreview=function(){
   window.addEventListener('resize',checkPersoGrid);
 })();
 </script>
-
-<!-- Chatbot BFA -->
-<script src="chatbot/config.js"></script>
-<script src="chatbot/fallback.js"></script>
-<script src="chatbot/chatbot.js"></script>
 </body>
 </html>
