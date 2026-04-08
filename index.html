@@ -658,6 +658,11 @@ footer .ft-green{color:var(--green)}
   .ms-left{display:none}
   .ms-right{padding:24px}
   #modal-box{width:98vw;max-height:95vh}
+  #pourquoi [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important}
+  #pourquoi [style*="grid-template-columns:repeat(2,1fr)"]{grid-template-columns:1fr!important}
+  #pourquoi [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  #pourquoi{padding:0}
+  #pourquoi>div{padding:80px 24px 100px!important}
 }
 </style>
 </head>
@@ -671,6 +676,7 @@ footer .ft-green{color:var(--green)}
     <li><a href="#compare">Comparatif</a></li>
     <li><a href="#data">Marché</a></li>
     <li><a href="#porter">Analyse</a></li>
+    <li><a href="#pourquoi">Pourquoi BFA</a></li>
   </ul>
   <a href="#cta" class="nav-cta">Commander</a>
 </nav>
@@ -1229,6 +1235,209 @@ footer .ft-green{color:var(--green)}
   </div>
 </section>
 
+<!-- SECTION 8B — PACKAGING "POURQUOI MOI ?" -->
+<section id="pourquoi" style="background:#0a0a0f;padding:0;overflow:hidden;position:relative;min-height:100vh">
+
+  <!-- Fond grain animé -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(21,88,214,0.18) 0%,transparent 70%),radial-gradient(ellipse 60% 80% at 80% 100%,rgba(34,201,138,0.12) 0%,transparent 70%);pointer-events:none;z-index:0"></div>
+
+  <div style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:140px 48px 160px">
+
+    <!-- HEADLINE packaging -->
+    <div class="fade-up" style="text-align:center;margin-bottom:100px">
+      <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(34,201,138,0.1);border:1px solid rgba(34,201,138,0.25);border-radius:980px;padding:6px 20px;margin-bottom:28px">
+        <span style="width:6px;height:6px;border-radius:50%;background:#22c98a;display:inline-block;box-shadow:0 0 8px #22c98a"></span>
+        <span style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#22c98a">Pourquoi BFA et pas un autre ?</span>
+      </div>
+      <h2 style="font-size:clamp(44px,7vw,96px);font-weight:800;letter-spacing:-0.05em;color:#fff;line-height:0.95;margin-bottom:24px">
+        La seule brosse<br>
+        <span style="background:linear-gradient(135deg,#22c98a 0%,#38c9f5 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">conçue pour durer.</span>
+      </h2>
+      <p style="font-size:20px;font-weight:300;color:rgba(255,255,255,0.45);max-width:560px;margin:0 auto;line-height:1.5">Pas un gadget. Pas du greenwashing.<br>Un objet quotidien pensé jusqu'au dernier millimètre.</p>
+    </div>
+
+    <!-- GRILLE ARGUMENTS PACKAGING -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:80px" class="fade-up">
+
+      <!-- ARG 1 -->
+      <div class="pkg-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:0;padding:48px 40px;transition:background .3s;position:relative;overflow:hidden" onmouseover="this.style.background='rgba(21,88,214,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#1558d6,transparent)"></div>
+        <div style="font-size:40px;margin-bottom:20px">🪵</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#1558d6;margin-bottom:12px">Matière</div>
+        <h3 style="font-size:24px;font-weight:800;letter-spacing:-0.03em;color:#fff;margin-bottom:12px;line-height:1.1">Hêtre FSC<br>certifié France</h3>
+        <p style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.6">Chaque manche est taillé dans du bois français traçable. Pas de plastique vierge. Pas de Chine. Un matériau vivant qui vieillit avec vous.</p>
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:8px">
+          <span style="font-size:28px;font-weight:800;color:#fff">∞</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.35)">durée de vie du manche</span>
+        </div>
+      </div>
+
+      <!-- ARG 2 -->
+      <div class="pkg-card" style="background:rgba(34,201,138,0.06);border:1px solid rgba(34,201,138,0.15);border-radius:0;padding:48px 40px;transition:background .3s;position:relative;overflow:hidden" onmouseover="this.style.background='rgba(34,201,138,0.12)'" onmouseout="this.style.background='rgba(34,201,138,0.06)'">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#22c98a,#38c9f5)"></div>
+        <div style="font-size:40px;margin-bottom:20px">♻️</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#22c98a;margin-bottom:12px">Impact</div>
+        <h3 style="font-size:24px;font-weight:800;letter-spacing:-0.03em;color:#fff;margin-bottom:12px;line-height:1.1">−96 % de<br>plastique en 10 ans</h3>
+        <p style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.6">Seule la tête (50 g de plastique) part au recyclage certifié freepost. Contre 200 g d'une brosse classique jetée entière. Le calcul est simple.</p>
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(34,201,138,0.15);display:flex;align-items:center;gap:8px">
+          <span style="font-size:28px;font-weight:800;color:#22c98a">40×</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.35)">moins de déchets plastique / an</span>
+        </div>
+      </div>
+
+      <!-- ARG 3 -->
+      <div class="pkg-card" style="background:rgba(56,201,245,0.05);border:1px solid rgba(56,201,245,0.12);border-radius:0;padding:48px 40px;transition:background .3s;position:relative;overflow:hidden" onmouseover="this.style.background='rgba(56,201,245,0.1)'" onmouseout="this.style.background='rgba(56,201,245,0.05)'">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#38c9f5,transparent)"></div>
+        <div style="font-size:40px;margin-bottom:20px">🔬</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#38c9f5;margin-bottom:12px">Qualité</div>
+        <h3 style="font-size:24px;font-weight:800;letter-spacing:-0.03em;color:#fff;margin-bottom:12px;line-height:1.1">Poils densité<br>clinique premium</h3>
+        <p style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.6">5 rangées × 9 touffes. Nylon recyclé haute résilience. Indicateur de renouvellement intégré. Recommandé par les dentistes pour la douceur gingivale.</p>
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(56,201,245,0.12);display:flex;align-items:center;gap:8px">
+          <span style="font-size:28px;font-weight:800;color:#38c9f5">4×</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.35)">plus doux que la moyenne GMS</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- LIGNE 2 — ARGUMENTS DIFFÉRENCIANTS -->
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-bottom:80px" class="fade-up">
+
+      <!-- ARG 4 — Made in France -->
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);padding:40px;display:flex;gap:28px;align-items:flex-start;transition:background .3s" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(255,255,255,0.02)'">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(21,88,214,0.15);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">🇫🇷</div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#1558d6;margin-bottom:8px">Fabrication</div>
+          <h4 style="font-size:20px;font-weight:800;letter-spacing:-0.03em;color:#fff;margin-bottom:8px">100% Made in France</h4>
+          <p style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.6">Manche : bois français. Assemblage : France. Recyclage : France. Zéro sous-traitance opaque. Traçabilité complète de la forêt à votre salle de bain.</p>
+          <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+            <span style="font-size:11px;background:rgba(21,88,214,0.15);color:#6699ff;padding:3px 10px;border-radius:4px">Certification FSC</span>
+            <span style="font-size:11px;background:rgba(21,88,214,0.15);color:#6699ff;padding:3px 10px;border-radius:4px">Filière courte</span>
+            <span style="font-size:11px;background:rgba(21,88,214,0.15);color:#6699ff;padding:3px 10px;border-radius:4px">Bilan carbone −68%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARG 5 — Abonnement intelligent -->
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);padding:40px;display:flex;gap:28px;align-items:flex-start;transition:background .3s" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(255,255,255,0.02)'">
+        <div style="width:56px;height:56px;border-radius:14px;background:rgba(34,201,138,0.12);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">📦</div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#22c98a;margin-bottom:8px">Commodité</div>
+          <h4 style="font-size:20px;font-weight:800;letter-spacing:-0.03em;color:#fff;margin-bottom:8px">Abonnement zéro friction</h4>
+          <p style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.6">La tête arrive chez vous avant que vous ayez besoin de la changer. Retour freepost inclus. Pause, annulation, modification en 2 clics. Dès 4,90€/mois.</p>
+          <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+            <span style="font-size:11px;background:rgba(34,201,138,0.12);color:#22c98a;padding:3px 10px;border-radius:4px">3 formules</span>
+            <span style="font-size:11px;background:rgba(34,201,138,0.12);color:#22c98a;padding:3px 10px;border-radius:4px">Sans engagement</span>
+            <span style="font-size:11px;background:rgba(34,201,138,0.12);color:#22c98a;padding:3px 10px;border-radius:4px">Retour offert</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- GRANDE CITATION CONVAINCANTE -->
+    <div class="fade-up" style="text-align:center;padding:80px 40px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);position:relative;overflow:hidden">
+      <div style="position:absolute;top:-60px;left:50%;transform:translateX(-50%);font-size:200px;line-height:1;color:rgba(34,201,138,0.05);font-weight:800;pointer-events:none;user-select:none">"</div>
+      <p style="font-size:clamp(22px,3.5vw,42px);font-weight:700;letter-spacing:-0.03em;color:#fff;line-height:1.25;max-width:800px;margin:0 auto 32px;position:relative">
+        Les autres vous vendent une brosse.<br>
+        <span style="color:#22c98a">BFA vous libère d'en racheter une.</span>
+      </p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+        <div style="display:flex;gap:4px">
+          <span style="color:#22c98a;font-size:16px">★★★★★</span>
+        </div>
+        <span style="font-size:13px;color:rgba(255,255,255,0.3)">Concept validé par 200+ testeurs · Score NPS 78</span>
+      </div>
+    </div>
+
+    <!-- TABLEAU COMPARAISON RAPIDE PACKAGING -->
+    <div class="fade-up" style="margin-top:80px">
+      <div style="text-align:center;margin-bottom:48px">
+        <h3 style="font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-0.04em;color:#fff;margin-bottom:12px">Le vrai coût sur 5 ans.</h3>
+        <p style="font-size:16px;color:rgba(255,255,255,0.4)">Comparez ce que vous payez réellement — et ce que vous jetez.</p>
+      </div>
+
+      <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;min-width:600px">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:16px 20px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);border-bottom:1px solid rgba(255,255,255,0.08)">Critère · 5 ans</th>
+            <th style="padding:16px 20px;font-size:14px;font-weight:800;color:#22c98a;border-bottom:2px solid rgba(34,201,138,0.3);background:rgba(34,201,138,0.06);text-align:center">BFA</th>
+            <th style="padding:16px 20px;font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.08);text-align:center">Lamazuna</th>
+            <th style="padding:16px 20px;font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.08);text-align:center">Brosse classique</th>
+            <th style="padding:16px 20px;font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);border-bottom:1px solid rgba(255,255,255,0.08);text-align:center">Électrique</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:18px 20px;font-size:14px;font-weight:500;color:rgba(255,255,255,0.8)">Coût total estimé</td>
+            <td style="padding:18px 20px;text-align:center;background:rgba(34,201,138,0.04)"><span style="font-size:18px;font-weight:800;color:#22c98a">294€</span></td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.5)">~380€</td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.5)">~100€</td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.5)">~320€</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:18px 20px;font-size:14px;font-weight:500;color:rgba(255,255,255,0.8)">Plastique jeté</td>
+            <td style="padding:18px 20px;text-align:center;background:rgba(34,201,138,0.04)"><span style="font-size:16px;font-weight:800;color:#22c98a">300g</span><br><span style="font-size:10px;color:#22c98a;opacity:0.7">recyclé</span></td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.5)">400g</td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.5)">4 000g</td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.5)">1 200g</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:18px 20px;font-size:14px;font-weight:500;color:rgba(255,255,255,0.8)">Manches achetés</td>
+            <td style="padding:18px 20px;text-align:center;background:rgba(34,201,138,0.04)"><span style="font-size:16px;font-weight:800;color:#22c98a">1</span></td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.5)">1–3</td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.5)">20</td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.5)">2–3</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:18px 20px;font-size:14px;font-weight:500;color:rgba(255,255,255,0.8)">Made in France</td>
+            <td style="padding:18px 20px;text-align:center;background:rgba(34,201,138,0.04)"><span style="color:#22c98a;font-size:20px">✓</span></td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.5)">Manche seulement</td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.3)">✗</td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.3)">✗</td>
+          </tr>
+          <tr>
+            <td style="padding:18px 20px;font-size:14px;font-weight:500;color:rgba(255,255,255,0.8)">Abonnement</td>
+            <td style="padding:18px 20px;text-align:center;background:rgba(34,201,138,0.04)"><span style="color:#22c98a;font-size:20px">✓</span></td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.3)">✗</td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.3)">✗</td>
+            <td style="padding:18px 20px;text-align:center;color:rgba(255,255,255,0.3)">✗</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:11px;color:rgba(255,255,255,0.2);text-align:center;margin-top:12px;font-style:italic">Estimation basée sur 4 têtes/an · Abonnement Essentiel BFA 4,90€/mois · Prix concurrents moyens 2025</p>
+    </div>
+
+    <!-- BLOC FINAL "LA PROMESSE" -->
+    <div class="fade-up" style="margin-top:100px;display:grid;grid-template-columns:1fr 1fr;gap:2px">
+      <div style="background:linear-gradient(135deg,rgba(21,88,214,0.15),rgba(21,88,214,0.05));border:1px solid rgba(21,88,214,0.2);padding:52px 48px">
+        <div style="font-size:48px;margin-bottom:20px">🎯</div>
+        <h4 style="font-size:clamp(22px,2.5vw,32px);font-weight:800;letter-spacing:-0.04em;color:#fff;margin-bottom:16px;line-height:1.1">La promesse<br>BFA</h4>
+        <p style="font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:24px">Un manche acheté une fois pour toujours. Une tête recyclée tous les 3 mois. Une brosse qui ne finit jamais à la poubelle — parce que nous reprenons tout.</p>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:10px"><span style="color:#22c98a;font-weight:700">→</span><span style="font-size:13px;color:rgba(255,255,255,0.5)">Satisfait ou remboursé 30 jours</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="color:#22c98a;font-weight:700">→</span><span style="font-size:13px;color:rgba(255,255,255,0.5)">Livraison offerte dès la 1ère commande</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><span style="color:#22c98a;font-weight:700">→</span><span style="font-size:13px;color:rgba(255,255,255,0.5)">Support humain · Pas de chatbot</span></div>
+        </div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(34,201,138,0.12),rgba(34,201,138,0.04));border:1px solid rgba(34,201,138,0.2);padding:52px 48px;display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <div style="font-size:48px;margin-bottom:20px">💚</div>
+          <h4 style="font-size:clamp(22px,2.5vw,32px);font-weight:800;letter-spacing:-0.04em;color:#fff;margin-bottom:16px;line-height:1.1">L'impact<br>concret</h4>
+          <p style="font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7">Pour chaque abonné BFA, c'est 19 brosses en plastique entières qui ne sont pas jetées sur 5 ans. À 10 000 abonnés, BFA retire 190 000 brosses de la poubelle par an.</p>
+        </div>
+        <div style="margin-top:32px;padding:24px;background:rgba(34,201,138,0.08);border-radius:12px">
+          <div style="font-size:40px;font-weight:800;color:#22c98a;letter-spacing:-0.04em">190 000</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px">brosses sauvées/an à 10k abonnés</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- SECTION 8 — CTA -->
 <section id="cta">
   <p class="cta-title fade-up">Brush For<br><span class="cta-green">Always.</span></p>
@@ -1393,7 +1602,7 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 
 // ══════════════════════════════════
-// HERO THREE.JS
+// HERO THREE.JS — VERSION PREMIUM
 // ══════════════════════════════════
 (function initHero(){
   const canvas = document.getElementById('hero-canvas');
@@ -1402,11 +1611,11 @@ window.addEventListener('scroll',()=>{
   renderer.shadowMap.enabled=true;
   renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure=1.2;
+  renderer.toneMappingExposure=1.4;
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45,1,0.1,100);
-  camera.position.set(0,0,5.5);
+  const camera = new THREE.PerspectiveCamera(38,1,0.1,100);
+  camera.position.set(0,0,6);
 
   function resize(){
     const w=canvas.clientWidth,h=canvas.clientHeight;
@@ -1416,75 +1625,220 @@ window.addEventListener('scroll',()=>{
   resize();
   new ResizeObserver(resize).observe(canvas);
 
-  scene.add(new THREE.AmbientLight(0xffffff,0.15));
-  const mainLight=new THREE.DirectionalLight(0xffffff,3.5);
-  mainLight.position.set(-3,5,3);mainLight.castShadow=true;scene.add(mainLight);
-  const rimLight=new THREE.DirectionalLight(0x38c9f5,1.5);
-  rimLight.position.set(3,-2,-3);scene.add(rimLight);
-  const fillLight=new THREE.DirectionalLight(0x22c98a,0.4);
-  fillLight.position.set(2,0,2);scene.add(fillLight);
+  // Éclairage cinématique multi-sources
+  scene.add(new THREE.AmbientLight(0xfff8f0,0.25));
+  const keyLight=new THREE.DirectionalLight(0xfff5e8,4.5);
+  keyLight.position.set(-4,6,4);keyLight.castShadow=true;scene.add(keyLight);
+  const rimLight=new THREE.DirectionalLight(0x38c9f5,2.2);
+  rimLight.position.set(5,-3,-4);scene.add(rimLight);
+  const fillLight=new THREE.DirectionalLight(0x22c98a,0.8);
+  fillLight.position.set(3,1,3);scene.add(fillLight);
+  const backLight=new THREE.DirectionalLight(0x1558d6,1.0);
+  backLight.position.set(-2,-4,-3);scene.add(backLight);
+  const bottomLight=new THREE.PointLight(0xffd4a0,1.5,8);
+  bottomLight.position.set(0,-3,2);scene.add(bottomLight);
+
+  // Génération texture bois procédurale via canvas 2D
+  function makeWoodTexture(){
+    const c=document.createElement('canvas');c.width=256;c.height=512;
+    const ctx=c.getContext('2d');
+    const grd=ctx.createLinearGradient(0,0,256,0);
+    grd.addColorStop(0,'#c8794a');grd.addColorStop(0.3,'#d4956a');
+    grd.addColorStop(0.6,'#c07040');grd.addColorStop(1,'#b8683a');
+    ctx.fillStyle=grd;ctx.fillRect(0,0,256,512);
+    // Veines du bois
+    for(let i=0;i<60;i++){
+      ctx.beginPath();
+      const x=Math.random()*256,wobble=Math.random()*20-10;
+      ctx.moveTo(x,0);
+      for(let y=0;y<512;y+=8){
+        ctx.lineTo(x+Math.sin(y*0.04+i)*wobble+Math.random()*3-1.5,y);
+      }
+      ctx.strokeStyle=`rgba(${Math.random()>0.5?'80,40,10':'180,100,50'},${0.05+Math.random()*0.12})`;
+      ctx.lineWidth=0.5+Math.random()*1.5;ctx.stroke();
+    }
+    // Nœuds du bois
+    for(let i=0;i<3;i++){
+      const x=80+Math.random()*100,y=100+Math.random()*300,r=8+Math.random()*14;
+      const g=ctx.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,'rgba(60,25,5,0.4)');g.addColorStop(1,'rgba(60,25,5,0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
+    }
+    const tex=new THREE.CanvasTexture(c);tex.wrapS=tex.wrapT=THREE.RepeatWrapping;
+    tex.repeat.set(1,2);return tex;
+  }
+
+  function makeRoughTexture(color){
+    const c=document.createElement('canvas');c.width=64;c.height=64;
+    const ctx=c.getContext('2d');
+    ctx.fillStyle=color;ctx.fillRect(0,0,64,64);
+    for(let i=0;i<400;i++){
+      const v=Math.floor(Math.random()*40-20);
+      ctx.fillStyle=`rgba(${v>0?255:0},${v>0?255:0},${v>0?255:0},${0.02+Math.random()*0.04})`;
+      ctx.fillRect(Math.random()*64,Math.random()*64,2,2);
+    }
+    return new THREE.CanvasTexture(c);
+  }
 
   const group=new THREE.Group();scene.add(group);
 
-  const handleGeo=new THREE.CylinderGeometry(0.12,0.15,2.4,32,1);
-  const handleMat=new THREE.MeshStandardMaterial({color:0xd4956a,roughness:0.55,metalness:0.02});
+  // ── MANCHE principal avec texture bois
+  const woodTex=makeWoodTexture();
+  const handleGeo=new THREE.CylinderGeometry(0.115,0.16,2.5,48,4,false);
+  // Légère courbure ergonomique via les vertices
+  const posAttr=handleGeo.attributes.position;
+  for(let i=0;i<posAttr.count;i++){
+    const y=posAttr.getY(i);
+    const bulge=Math.exp(-y*y*0.5)*0.02;
+    posAttr.setX(i,posAttr.getX(i)*(1+bulge));
+    posAttr.setZ(i,posAttr.getZ(i)*(1+bulge));
+  }
+  handleGeo.computeVertexNormals();
+  const handleMat=new THREE.MeshStandardMaterial({
+    map:woodTex,roughness:0.5,metalness:0.0,
+    roughnessMap:woodTex,
+  });
   const handle=new THREE.Mesh(handleGeo,handleMat);
-  handle.position.y=-0.6;group.add(handle);
+  handle.position.y=-0.55;group.add(handle);
 
-  const gripGeo=new THREE.CylinderGeometry(0.145,0.145,0.7,32);
-  const gripMat=new THREE.MeshStandardMaterial({color:0x1558d6,roughness:0.4,metalness:0.1});
+  // Fond plat du manche (embout arrondi)
+  const capGeo=new THREE.SphereGeometry(0.115,24,12,0,Math.PI*2,Math.PI/2,Math.PI/2);
+  const cap=new THREE.Mesh(capGeo,handleMat);
+  cap.position.y=-1.8;cap.rotation.x=Math.PI;group.add(cap);
+  const capTopGeo=new THREE.SphereGeometry(0.16,24,12,0,Math.PI*2,Math.PI/2,Math.PI/2);
+  const capTop=new THREE.Mesh(capTopGeo,handleMat);
+  capTop.position.y=0.7;group.add(capTop);
+
+  // ── ZONE GRIP texturée (biopolymère bleu)
+  const gripTexture=makeRoughTexture('#1558d6');
+  const gripMat=new THREE.MeshStandardMaterial({
+    color:0x1558d6,roughness:0.35,metalness:0.12,
+    map:gripTexture,
+    envMapIntensity:1.5
+  });
+  const gripGeo=new THREE.CylinderGeometry(0.148,0.148,0.75,48);
   const grip=new THREE.Mesh(gripGeo,gripMat);
-  grip.position.y=0.2;group.add(grip);
+  grip.position.y=0.22;group.add(grip);
 
-  for(let i=0;i<5;i++){
-    const rGeo=new THREE.TorusGeometry(0.148,0.015,8,32);
-    const rMat=new THREE.MeshStandardMaterial({color:0x0d3fa0,roughness:0.5});
+  // Rainures ergonomiques du grip (6 rainures)
+  for(let i=0;i<7;i++){
+    const rGeo=new THREE.TorusGeometry(0.15,0.012,10,48);
+    const rMat=new THREE.MeshStandardMaterial({color:0x0d3fa0,roughness:0.45,metalness:0.15});
     const r=new THREE.Mesh(rGeo,rMat);
-    r.rotation.x=Math.PI/2;r.position.y=0.0+i*0.12-0.24;group.add(r);
+    r.rotation.x=Math.PI/2;r.position.y=-0.14+i*0.1;group.add(r);
   }
 
-  const jointGeo=new THREE.TorusGeometry(0.16,0.025,12,64);
-  const jointMat=new THREE.MeshStandardMaterial({color:0x22c98a,roughness:0.2,metalness:0.3,emissive:0x22c98a,emissiveIntensity:0.3});
+  // ── JOINT MAGNÉTIQUE (anneau vert lumineux)
+  const jointGeo=new THREE.TorusGeometry(0.168,0.028,16,80);
+  const jointMat=new THREE.MeshStandardMaterial({
+    color:0x22c98a,roughness:0.12,metalness:0.45,
+    emissive:0x22c98a,emissiveIntensity:0.5,
+    envMapIntensity:2.0
+  });
   const joint=new THREE.Mesh(jointGeo,jointMat);
-  joint.rotation.x=Math.PI/2;joint.position.y=0.72;group.add(joint);
+  joint.rotation.x=Math.PI/2;joint.position.y=0.75;group.add(joint);
+  // Halo glow autour du joint
+  const haloGeo=new THREE.TorusGeometry(0.2,0.04,8,40);
+  const haloMat=new THREE.MeshStandardMaterial({
+    color:0x22c98a,transparent:true,opacity:0.18,
+    emissive:0x22c98a,emissiveIntensity:0.8,depthWrite:false
+  });
+  const halo=new THREE.Mesh(haloGeo,haloMat);
+  halo.rotation.x=Math.PI/2;halo.position.y=0.75;group.add(halo);
 
-  const neckGeo=new THREE.CylinderGeometry(0.1,0.13,0.3,32);
-  const neck=new THREE.Mesh(neckGeo,new THREE.MeshStandardMaterial({color:0xe8ddd0,roughness:0.5}));
-  neck.position.y=0.95;group.add(neck);
+  // ── COL / NECK arrondi
+  const neckGeo=new THREE.CylinderGeometry(0.098,0.135,0.32,32);
+  const neckMat=new THREE.MeshStandardMaterial({color:0xe2d8cc,roughness:0.45,metalness:0.05});
+  const neck=new THREE.Mesh(neckGeo,neckMat);
+  neck.position.y=0.98;group.add(neck);
 
-  const headGeo=new THREE.BoxGeometry(0.28,0.6,0.12);
-  headGeo.translate(0,0.3,0);
-  const headMat=new THREE.MeshStandardMaterial({color:0xf2ede6,roughness:0.4,metalness:0.05});
-  const head=new THREE.Mesh(headGeo,headMat);
-  head.position.y=1.2;group.add(head);
+  // ── TÊTE — forme réaliste arrondie (pas juste un box)
+  const headShape = new THREE.Shape();
+  const hw=0.14,hh=0.58,hr=0.06;
+  headShape.moveTo(-hw+hr,0);
+  headShape.lineTo(hw-hr,0);
+  headShape.quadraticCurveTo(hw,0,hw,hr);
+  headShape.lineTo(hw,hh-hr);
+  headShape.quadraticCurveTo(hw,hh,-hw+hr+hw,hh);// top rounded
+  headShape.quadraticCurveTo(-hw+hr,hh,-hw,hh-hr);
+  headShape.lineTo(-hw,hr);
+  headShape.quadraticCurveTo(-hw,0,-hw+hr,0);
+  const extSettings={depth:0.1,bevelEnabled:true,bevelThickness:0.015,bevelSize:0.015,bevelSegments:4};
+  const headGeo3D=new THREE.ExtrudeGeometry(headShape,extSettings);
+  headGeo3D.center();
+  const headMat=new THREE.MeshStandardMaterial({color:0xf0e8df,roughness:0.38,metalness:0.06,envMapIntensity:0.8});
+  const head=new THREE.Mesh(headGeo3D,headMat);
+  head.position.y=1.52;head.position.z=-0.01;group.add(head);
 
-  const bristleGeo=new THREE.CylinderGeometry(0.006,0.004,0.14,4);
-  const bristleMat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.9});
-  const bristleCyanMat=new THREE.MeshStandardMaterial({color:0x38c9f5,roughness:0.9});
-  for(let r=0;r<4;r++){
-    for(let c=0;c<6;c++){
-      const mat=(c===2||c===3)?bristleCyanMat:bristleMat;
-      const b=new THREE.Mesh(bristleGeo,mat);
-      b.position.set(-0.09+r*0.06,-0.02+c*0.065+1.38,0.08);group.add(b);
+  // ── POILS ultra-réalistes (grille dense + variation hauteur)
+  const bristleWhiteMat=new THREE.MeshStandardMaterial({color:0xfafafa,roughness:0.92,metalness:0.0});
+  const bristleCyanMat=new THREE.MeshStandardMaterial({color:0x38c9f5,roughness:0.88,metalness:0.0,emissive:0x38c9f5,emissiveIntensity:0.12});
+  const bristleSoftMat=new THREE.MeshStandardMaterial({color:0xe8e0f0,roughness:0.95,metalness:0.0});
+  
+  const ROWS=5, COLS=9;
+  for(let r=0;r<ROWS;r++){
+    for(let c=0;c<COLS;c++){
+      const variation=0.96+Math.random()*0.08;
+      const bGeo=new THREE.CylinderGeometry(0.0042*variation,0.003*variation,0.16*variation,5);
+      // Couleur : cyan pour les 2 colonnes centrales, douce pour extérieur, blanc sinon
+      let mat;
+      if(c===3||c===4||c===5) mat=bristleCyanMat;
+      else if(c===0||c===COLS-1) mat=bristleSoftMat;
+      else mat=bristleWhiteMat;
+      const b=new THREE.Mesh(bGeo,mat);
+      const px=-0.1+r*0.054;
+      const py=1.26+c*0.057;
+      // Légère inclinaison aléatoire
+      b.rotation.x=(Math.random()-0.5)*0.06;
+      b.rotation.z=(Math.random()-0.5)*0.04;
+      b.position.set(px,py,0.085);
+      group.add(b);
     }
   }
-  group.rotation.z=0.08;
 
+  // ── LOGO gravé (disque plat sur le manche)
+  const logoGeo=new THREE.CircleGeometry(0.055,32);
+  const logoMat=new THREE.MeshStandardMaterial({color:0xc07040,roughness:0.7,metalness:0.05});
+  const logo=new THREE.Mesh(logoGeo,logoMat);
+  logo.position.set(0,-1.2,0.16);group.add(logo);
+  // Texte BFA gravé
+  const bfaRingGeo=new THREE.TorusGeometry(0.04,0.006,6,32);
+  const bfaRing=new THREE.Mesh(bfaRingGeo,new THREE.MeshStandardMaterial({color:0xa05030,roughness:0.8}));
+  bfaRing.position.set(0,-1.2,0.168);group.add(bfaRing);
+
+  group.rotation.z=0.07;
+
+  // Interaction souris/tactile
   let isDragging=false,prevMouse={x:0,y:0};
   canvas.addEventListener('mousedown',e=>{isDragging=true;prevMouse={x:e.clientX,y:e.clientY}});
+  canvas.addEventListener('touchstart',e=>{isDragging=true;prevMouse={x:e.touches[0].clientX,y:e.touches[0].clientY}},{passive:true});
   window.addEventListener('mouseup',()=>isDragging=false);
+  window.addEventListener('touchend',()=>isDragging=false);
   window.addEventListener('mousemove',e=>{
     if(!isDragging)return;
     const dx=e.clientX-prevMouse.x,dy=e.clientY-prevMouse.y;
-    group.rotation.y+=dx*0.01;group.rotation.x+=dy*0.01;
+    group.rotation.y+=dx*0.012;group.rotation.x+=dy*0.012;
     prevMouse={x:e.clientX,y:e.clientY};
   });
+  window.addEventListener('touchmove',e=>{
+    if(!isDragging)return;
+    const dx=e.touches[0].clientX-prevMouse.x,dy=e.touches[0].clientY-prevMouse.y;
+    group.rotation.y+=dx*0.012;group.rotation.x+=dy*0.012;
+    prevMouse={x:e.touches[0].clientX,y:e.touches[0].clientY};
+  },{passive:true});
 
   let t=0;
   function animate(){
-    requestAnimationFrame(animate);t+=0.01;
-    if(!isDragging) group.rotation.y=Math.sin(t*0.4)*0.3;
-    joint.material.emissiveIntensity=0.2+Math.sin(t*2)*0.15;
+    requestAnimationFrame(animate);t+=0.008;
+    if(!isDragging){
+      group.rotation.y=Math.sin(t*0.35)*0.35;
+      group.rotation.x=Math.sin(t*0.22)*0.06;
+    }
+    // Pulsation joint + halo
+    const pulse=0.35+Math.sin(t*2.5)*0.2;
+    joint.material.emissiveIntensity=pulse;
+    halo.material.opacity=0.1+Math.sin(t*2.5)*0.08;
+    halo.scale.setScalar(1+Math.sin(t*2.5)*0.06);
     renderer.render(scene,camera);
   }
   animate();
@@ -1493,54 +1847,98 @@ window.addEventListener('scroll',()=>{
 })();
 
 // ══════════════════════════════════
-// PRODUCT THREE.JS (sticky)
+// PRODUCT THREE.JS (sticky) — PREMIUM
 // ══════════════════════════════════
 (function initProduct(){
   const canvas=document.getElementById('product-canvas');
   const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;
   const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(42,1,0.1,100);
-  camera.position.set(0,0,5.5);
+  const camera=new THREE.PerspectiveCamera(38,1,0.1,100);
+  camera.position.set(0,0,6);
   function resize(){
     const w=canvas.clientWidth,h=canvas.clientHeight;
     renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
   }
   resize();new ResizeObserver(resize).observe(canvas);
-  scene.add(new THREE.AmbientLight(0xffffff,0.2));
-  const mainL=new THREE.DirectionalLight(0xffffff,3);mainL.position.set(-3,5,3);scene.add(mainL);
-  const rimL=new THREE.DirectionalLight(0x38c9f5,1.2);rimL.position.set(3,-2,-3);scene.add(rimL);
 
-  const spotHandle=new THREE.SpotLight(0xd4956a,0,8,0.6,0.5);spotHandle.position.set(2,-1,3);scene.add(spotHandle);
-  const spotGrip=new THREE.SpotLight(0x1558d6,0,8,0.6,0.5);spotGrip.position.set(-2,0,3);scene.add(spotGrip);
-  const spotJoint=new THREE.SpotLight(0x22c98a,0,6,0.8,0.5);spotJoint.position.set(0,1,3);scene.add(spotJoint);
-  const spotHead=new THREE.SpotLight(0x38c9f5,0,6,0.5,0.5);spotHead.position.set(1,4,3);scene.add(spotHead);
+  scene.add(new THREE.AmbientLight(0xfff8f0,0.28));
+  const mainL=new THREE.DirectionalLight(0xfff5e8,4.2);mainL.position.set(-4,6,4);scene.add(mainL);
+  const rimL=new THREE.DirectionalLight(0x38c9f5,1.8);rimL.position.set(5,-3,-4);scene.add(rimL);
+  const fillL=new THREE.DirectionalLight(0x22c98a,0.6);fillL.position.set(3,1,3);scene.add(fillL);
+
+  const spotHandle=new THREE.SpotLight(0xd4956a,0,10,0.6,0.4);spotHandle.position.set(2,-1,3);scene.add(spotHandle);
+  const spotGrip=new THREE.SpotLight(0x4488ff,0,10,0.6,0.4);spotGrip.position.set(-2,0,3);scene.add(spotGrip);
+  const spotJoint=new THREE.SpotLight(0x22c98a,0,8,0.8,0.4);spotJoint.position.set(0,1,3);scene.add(spotJoint);
+  const spotHead=new THREE.SpotLight(0x38c9f5,0,8,0.5,0.4);spotHead.position.set(1,4,3);scene.add(spotHead);
 
   const group=new THREE.Group();scene.add(group);
-  const handleMat=new THREE.MeshStandardMaterial({color:0xd4956a,roughness:0.55,metalness:0.02});
-  const handle=new THREE.Mesh(new THREE.CylinderGeometry(0.12,0.15,2.4,32),handleMat);
-  handle.position.y=-0.6;group.add(handle);
-  const gripMat=new THREE.MeshStandardMaterial({color:0x1558d6,roughness:0.4,metalness:0.1});
-  const grip=new THREE.Mesh(new THREE.CylinderGeometry(0.145,0.145,0.7,32),gripMat);
-  grip.position.y=0.2;group.add(grip);
-  for(let i=0;i<5;i++){
-    const r=new THREE.Mesh(new THREE.TorusGeometry(0.148,0.015,8,32),new THREE.MeshStandardMaterial({color:0x0d3fa0,roughness:0.5}));
-    r.rotation.x=Math.PI/2;r.position.y=i*0.12-0.24;group.add(r);
+
+  // Texture bois
+  function makeWood2(){
+    const c=document.createElement('canvas');c.width=128;c.height=512;
+    const ctx=c.getContext('2d');
+    const g=ctx.createLinearGradient(0,0,128,0);
+    g.addColorStop(0,'#c27545');g.addColorStop(0.4,'#d4956a');g.addColorStop(1,'#b86538');
+    ctx.fillStyle=g;ctx.fillRect(0,0,128,512);
+    for(let i=0;i<40;i++){
+      ctx.beginPath();const x=Math.random()*128,w=Math.random()*18-9;
+      ctx.moveTo(x,0);
+      for(let y=0;y<512;y+=6) ctx.lineTo(x+Math.sin(y*0.05+i)*w+Math.random()*2-1,y);
+      ctx.strokeStyle=`rgba(60,25,5,${0.04+Math.random()*0.1})`;
+      ctx.lineWidth=0.5+Math.random();ctx.stroke();
+    }
+    return new THREE.CanvasTexture(c);
   }
-  const jointMat=new THREE.MeshStandardMaterial({color:0x22c98a,roughness:0.2,metalness:0.3,emissive:0x22c98a,emissiveIntensity:0.2});
-  const joint=new THREE.Mesh(new THREE.TorusGeometry(0.16,0.025,12,64),jointMat);
-  joint.rotation.x=Math.PI/2;joint.position.y=0.72;group.add(joint);
-  const neck=new THREE.Mesh(new THREE.CylinderGeometry(0.1,0.13,0.3,32),new THREE.MeshStandardMaterial({color:0xe8ddd0,roughness:0.5}));
-  neck.position.y=0.95;group.add(neck);
-  const headGeo=new THREE.BoxGeometry(0.28,0.6,0.12);headGeo.translate(0,0.3,0);
-  const head=new THREE.Mesh(headGeo,new THREE.MeshStandardMaterial({color:0xf2ede6,roughness:0.4,metalness:0.05}));
-  head.position.y=1.2;group.add(head);
-  for(let r=0;r<4;r++){
-    for(let c=0;c<6;c++){
-      const mat=(c===2||c===3)?new THREE.MeshStandardMaterial({color:0x38c9f5,roughness:0.9}):new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.9});
-      const b=new THREE.Mesh(new THREE.CylinderGeometry(0.006,0.004,0.14,4),mat);
-      b.position.set(-0.09+r*0.06,-0.02+c*0.065+1.38,0.08);group.add(b);
+  const woodTex2=makeWood2();
+  const handleMat=new THREE.MeshStandardMaterial({map:woodTex2,roughness:0.52,metalness:0.0});
+  const handle=new THREE.Mesh(new THREE.CylinderGeometry(0.115,0.16,2.5,48),handleMat);
+  handle.position.y=-0.55;group.add(handle);
+  const capG=new THREE.SphereGeometry(0.115,20,10,0,Math.PI*2,Math.PI/2,Math.PI/2);
+  const cap=new THREE.Mesh(capG,handleMat);cap.position.y=-1.8;cap.rotation.x=Math.PI;group.add(cap);
+
+  const gripMat=new THREE.MeshStandardMaterial({color:0x1558d6,roughness:0.32,metalness:0.15,envMapIntensity:1.8});
+  const grip=new THREE.Mesh(new THREE.CylinderGeometry(0.148,0.148,0.75,48),gripMat);
+  grip.position.y=0.22;group.add(grip);
+  for(let i=0;i<7;i++){
+    const r=new THREE.Mesh(new THREE.TorusGeometry(0.152,0.011,10,48),new THREE.MeshStandardMaterial({color:0x0d3fa0,roughness:0.45}));
+    r.rotation.x=Math.PI/2;r.position.y=-0.14+i*0.1;group.add(r);
+  }
+
+  const jointMat=new THREE.MeshStandardMaterial({color:0x22c98a,roughness:0.1,metalness:0.5,emissive:0x22c98a,emissiveIntensity:0.2,envMapIntensity:2.0});
+  const joint=new THREE.Mesh(new THREE.TorusGeometry(0.168,0.028,16,80),jointMat);
+  joint.rotation.x=Math.PI/2;joint.position.y=0.75;group.add(joint);
+  const haloM=new THREE.MeshStandardMaterial({color:0x22c98a,transparent:true,opacity:0.15,emissive:0x22c98a,emissiveIntensity:0.8,depthWrite:false});
+  const halo=new THREE.Mesh(new THREE.TorusGeometry(0.2,0.04,8,40),haloM);
+  halo.rotation.x=Math.PI/2;halo.position.y=0.75;group.add(halo);
+
+  const neck=new THREE.Mesh(new THREE.CylinderGeometry(0.098,0.135,0.32,32),new THREE.MeshStandardMaterial({color:0xe2d8cc,roughness:0.45}));
+  neck.position.y=0.98;group.add(neck);
+
+  // Tête extrudée
+  const headShape=new THREE.Shape();
+  const hw=0.14,hh=0.58,hr=0.06;
+  headShape.moveTo(-hw+hr,0);headShape.lineTo(hw-hr,0);headShape.quadraticCurveTo(hw,0,hw,hr);
+  headShape.lineTo(hw,hh-hr);headShape.quadraticCurveTo(hw,hh,-hw+hr+hw,hh);headShape.quadraticCurveTo(-hw+hr,hh,-hw,hh-hr);
+  headShape.lineTo(-hw,hr);headShape.quadraticCurveTo(-hw,0,-hw+hr,0);
+  const headGeo3D=new THREE.ExtrudeGeometry(headShape,{depth:0.1,bevelEnabled:true,bevelThickness:0.015,bevelSize:0.015,bevelSegments:4});
+  headGeo3D.center();
+  const head=new THREE.Mesh(headGeo3D,new THREE.MeshStandardMaterial({color:0xf0e8df,roughness:0.38,metalness:0.06}));
+  head.position.y=1.52;head.position.z=-0.01;group.add(head);
+
+  // Poils premium
+  const bWM=new THREE.MeshStandardMaterial({color:0xfafafa,roughness:0.92});
+  const bCM=new THREE.MeshStandardMaterial({color:0x38c9f5,roughness:0.88,emissive:0x38c9f5,emissiveIntensity:0.1});
+  const bSM=new THREE.MeshStandardMaterial({color:0xe8e0f0,roughness:0.95});
+  for(let r=0;r<5;r++){
+    for(let c=0;c<9;c++){
+      const v=0.96+Math.random()*0.08;
+      const bGeo=new THREE.CylinderGeometry(0.0042*v,0.003*v,0.16*v,5);
+      let mat=(c===3||c===4||c===5)?bCM:(c===0||c===8)?bSM:bWM;
+      const b=new THREE.Mesh(bGeo,mat);
+      b.rotation.x=(Math.random()-0.5)*0.06;b.rotation.z=(Math.random()-0.5)*0.04;
+      b.position.set(-0.1+r*0.054,1.26+c*0.057,0.085);group.add(b);
     }
   }
   group.rotation.z=0.06;group.rotation.y=-0.2;
@@ -1549,10 +1947,10 @@ window.addEventListener('scroll',()=>{
   let currentStep=0,t=0;
   function setStep(s){
     currentStep=s;spots.forEach(sp=>sp.intensity=0);
-    if(s===0)spotHandle.intensity=2.5;
-    if(s===1)spotGrip.intensity=2.5;
-    if(s===2){spotJoint.intensity=3;jointMat.emissiveIntensity=0.6;}else{jointMat.emissiveIntensity=0.2;}
-    if(s===3)spotHead.intensity=2.5;
+    if(s===0)spotHandle.intensity=3.5;
+    if(s===1)spotGrip.intensity=3.5;
+    if(s===2){spotJoint.intensity=4.5;jointMat.emissiveIntensity=0.8;}else{jointMat.emissiveIntensity=0.2;}
+    if(s===3)spotHead.intensity=3.5;
   }
   const steps=document.querySelectorAll('.product-step');
   const stepObs=new IntersectionObserver(entries=>{
@@ -1565,9 +1963,13 @@ window.addEventListener('scroll',()=>{
   },{threshold:0.5,rootMargin:'-20% 0px -20% 0px'});
   steps.forEach(s=>stepObs.observe(s));
   function animate(){
-    requestAnimationFrame(animate);t+=0.012;
-    group.rotation.y=Math.sin(t*0.3)*0.15-0.2;
-    if(currentStep===2)jointMat.emissiveIntensity=0.4+Math.sin(t*3)*0.3;
+    requestAnimationFrame(animate);t+=0.01;
+    group.rotation.y=Math.sin(t*0.28)*0.18-0.2;
+    if(currentStep===2){
+      jointMat.emissiveIntensity=0.6+Math.sin(t*3)*0.3;
+      haloM.opacity=0.1+Math.sin(t*3)*0.08;
+      halo.scale.setScalar(1+Math.sin(t*3)*0.08);
+    }
     renderer.render(scene,camera);
   }
   animate();setStep(0);
