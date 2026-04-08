@@ -1,0 +1,94 @@
+🚀 QUICKSTART - Chatbot BFA en 3 étapes
+
+═════════════════════════════════════════════════════════════
+
+⏱️  TEMPS TOTAL: 5 MINUTES
+
+═════════════════════════════════════════════════════════════
+
+ÉTAPE 1: Obtenir une clé API (2 min)
+─────────────────────────────────────
+
+1. Ouvre: https://platform.openai.com/api-keys
+2. Clique: "Create new secret key"
+3. Copie ta clé (ressemble à: sk-proj-abc123...)
+
+⚠️  Important: Tu ne pourras pas la revoir après! Copie-la maintenant.
+
+═════════════════════════════════════════════════════════════
+
+ÉTAPE 2: Ajouter la clé au site (2 min)
+───────────────────────────────────────
+
+1. Ouvre: chatbot/config.js
+2. Cherche:
+   apiKey: 'sk-YOUR_API_KEY_HERE',
+
+3. Remplace par ta clé:
+   apiKey: 'sk-proj-abc123...',
+
+4. Sauvegarde le fichier (Ctrl+S)
+
+═════════════════════════════════════════════════════════════
+
+ÉTAPE 3: Tester! (1 min)
+───────────────────────
+
+1. Rafraîchis ton site (Ctrl+F5)
+2. Cherche le 💬 en bas à droite
+3. Clique dessus
+4. Pose une question: "Qu'est-ce que BFA?"
+5. Le chatbot répond! ✅ C'EST FAIT!
+
+═════════════════════════════════════════════════════════════
+
+🎨 BONUS: Personnalisation (optionnel)
+
+Édite chatbot/config.js pour changer:
+
+Bienvenue:
+  welcomeMessage: 'Coucou! Tu as une question?'
+
+Questions suggérées:
+  suggestions: [
+    'Qu\'est-ce que BFA?',
+    'Quel est le prix?',
+  ]
+
+═════════════════════════════════════════════════════════════
+
+❓ TROUBLESHOOTING: Ça ne marche pas?
+
+Vérifie:
+□ Tu as bien ajouté la clé API
+□ Pas de typo dans la clé OpenAI
+□ Tu as sauvegardé le fichier
+□ Tu as bien rafraîchi le site (Ctrl+F5)
+□ La console (F12 → Console) ne montre pas d'erreurs rouges
+
+Encore rien? 
+→ Regarde CHATBOT_GUIDE.md pour des solutions détaillées
+
+═════════════════════════════════════════════════════════════
+
+📖 BESOIN DE PLUS D'INFOS?
+
+Pour une configuration avancée:
+→ Lis CHATBOT_GUIDE.md (complet en français)
+
+Pour résumé technique:
+→ Lis CHATBOT_SUMMARY.txt
+
+Pour déployer en production:
+→ Lis backend/README.md
+
+═════════════════════════════════════════════════════════════
+
+✅ C'EST TOUT!
+
+Tu as un chatbot IA professionnel sur ton site! 🎉
+
+Tes visiteurs peuvent maintenant poser des questions 24/7
+et obtenir des réponses intelligentes! 🚀
+
+═════════════════════════════════════════════════════════════
