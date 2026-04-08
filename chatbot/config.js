@@ -1,7 +1,7 @@
 // Configuration du Chatbot BFA
 const BFA_CHATBOT_CONFIG = {
   // Votre clé API OpenAI - À remplacer par votre propre clé
-  apiKey: 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,
+  apiKey: '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',
   
   // Contexte du produit BFA pour l'IA
   systemPrompt: `Tu es un assistant intelligent pour Brush For Always (BFA), une brosse à dents écologique révolutionnaire.
