@@ -677,6 +677,7 @@ footer .ft-green{color:var(--green)}
     <li><a href="#data">Marché</a></li>
     <li><a href="#porter">Analyse</a></li>
     <li><a href="#pourquoi">Pourquoi BFA</a></li>
+    <li><a href="#monbfa">Mon BFA</a></li>
   </ul>
   <a href="#cta" class="nav-cta">Commander</a>
 </nav>
@@ -1435,6 +1436,157 @@ footer .ft-green{color:var(--green)}
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- SECTION MON BFA — PERSONNALISATION + JEU -->
+<section id="monbfa" style="background:#f5f5f7;padding:120px 48px 0">
+  <div style="text-align:center;margin-bottom:72px" class="fade-up">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(34,201,138,0.1);color:#22c98a;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:6px 16px;border-radius:980px;margin-bottom:20px">✦ Espace personnel</div>
+    <h2 style="font-size:clamp(40px,6vw,80px);font-weight:800;letter-spacing:-0.04em;color:#1d1d1f;line-height:1;margin-bottom:16px">Faites-le vôtre.</h2>
+    <p style="font-size:19px;font-weight:300;color:#6e6e73;max-width:560px;margin:0 auto">Choisissez un prénom, une couleur, et découvrez comment votre BFA vous ressemble vraiment.</p>
+  </div>
+
+  <!-- PERSONNALISATION CARD -->
+  <div style="max-width:960px;margin:0 auto 64px;background:#fff;border-radius:28px;padding:56px;box-shadow:0 4px 40px rgba(0,0,0,0.07)" class="fade-up">
+    <div id="perso-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center">
+      <div>
+        <h3 style="font-size:28px;font-weight:800;letter-spacing:-0.03em;color:#1d1d1f;margin-bottom:8px">Votre brosse,<br>à votre image.</h3>
+        <p style="font-size:15px;color:#6e6e73;margin-bottom:36px;line-height:1.6">On croit que les détails comptent. Parce que se brosser les dents deux fois par jour, ça mérite d'être joli.</p>
+        <div style="margin-bottom:24px">
+          <label style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6e6e73;display:block;margin-bottom:10px">Votre prénom</label>
+          <input id="bfa-name-input" type="text" placeholder="ex: Sophie" maxlength="18"
+            style="width:100%;padding:14px 20px;border-radius:14px;border:1.5px solid rgba(0,0,0,0.1);font-size:17px;font-family:inherit;color:#1d1d1f;background:#f5f5f7;outline:none;transition:border-color .25s"
+            oninput="updateBFAPreview()" onfocus="this.style.borderColor='#22c98a'" onblur="this.style.borderColor='rgba(0,0,0,0.1)'">
+        </div>
+        <div style="margin-bottom:32px">
+          <label style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6e6e73;display:block;margin-bottom:14px">Couleur de tête</label>
+          <div style="display:flex;gap:10px;flex-wrap:wrap" id="color-swatches">
+            <div class="bfa-swatch active" data-color="#f2ede6" data-name="Naturel" onclick="selectBFAColor(this)" style="width:40px;height:40px;border-radius:50%;background:#f2ede6;cursor:pointer;border:3px solid #1d1d1f;transition:transform .2s,border-color .2s" title="Naturel"></div>
+            <div class="bfa-swatch" data-color="#22c98a" data-name="Vert forêt" onclick="selectBFAColor(this)" style="width:40px;height:40px;border-radius:50%;background:#22c98a;cursor:pointer;border:3px solid transparent;transition:transform .2s,border-color .2s" title="Vert forêt"></div>
+            <div class="bfa-swatch" data-color="#38c9f5" data-name="Bleu ciel" onclick="selectBFAColor(this)" style="width:40px;height:40px;border-radius:50%;background:#38c9f5;cursor:pointer;border:3px solid transparent;transition:transform .2s,border-color .2s" title="Bleu ciel"></div>
+            <div class="bfa-swatch" data-color="#ff7eb3" data-name="Rose doux" onclick="selectBFAColor(this)" style="width:40px;height:40px;border-radius:50%;background:#ff7eb3;cursor:pointer;border:3px solid transparent;transition:transform .2s,border-color .2s" title="Rose doux"></div>
+            <div class="bfa-swatch" data-color="#a78bfa" data-name="Lavande" onclick="selectBFAColor(this)" style="width:40px;height:40px;border-radius:50%;background:#a78bfa;cursor:pointer;border:3px solid transparent;transition:transform .2s,border-color .2s" title="Lavande"></div>
+            <div class="bfa-swatch" data-color="#fb923c" data-name="Terracotta" onclick="selectBFAColor(this)" style="width:40px;height:40px;border-radius:50%;background:#fb923c;cursor:pointer;border:3px solid transparent;transition:transform .2s,border-color .2s" title="Terracotta"></div>
+            <div class="bfa-swatch" data-color="#f59e0b" data-name="Miel" onclick="selectBFAColor(this)" style="width:40px;height:40px;border-radius:50%;background:#f59e0b;cursor:pointer;border:3px solid transparent;transition:transform .2s,border-color .2s" title="Miel"></div>
+            <div class="bfa-swatch" data-color="#1d1d1f" data-name="Minuit" onclick="selectBFAColor(this)" style="width:40px;height:40px;border-radius:50%;background:#1d1d1f;cursor:pointer;border:3px solid transparent;transition:transform .2s,border-color .2s" title="Minuit"></div>
+          </div>
+          <p id="bfa-color-label" style="font-size:13px;color:#6e6e73;margin-top:10px">Coloris : <strong>Naturel</strong></p>
+        </div>
+        <div id="bfa-personal-tag" style="display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:14px;background:#f5f5f7;transition:background .4s">
+          <span style="font-size:22px">🪥</span>
+          <div>
+            <div id="bfa-tag-name" style="font-size:16px;font-weight:700;color:#1d1d1f">Ma brosse BFA</div>
+            <div id="bfa-tag-color" style="font-size:12px;color:#6e6e73">Tête Naturel · Made in France</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:20px">
+        <div style="position:relative;width:180px;height:320px">
+          <svg id="bfa-brush-svg" viewBox="0 0 180 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.12))">
+            <rect x="76" y="100" width="28" height="160" rx="10" fill="#d4956a"/>
+            <rect x="78" y="102" width="6" height="156" rx="3" fill="rgba(255,255,255,0.15)"/>
+            <rect x="74" y="160" width="32" height="60" rx="8" fill="#1558d6"/>
+            <rect x="74" y="170" width="32" height="2" rx="1" fill="rgba(255,255,255,0.25)"/>
+            <rect x="74" y="178" width="32" height="2" rx="1" fill="rgba(255,255,255,0.25)"/>
+            <rect x="74" y="186" width="32" height="2" rx="1" fill="rgba(255,255,255,0.25)"/>
+            <rect x="74" y="194" width="32" height="2" rx="1" fill="rgba(255,255,255,0.25)"/>
+            <ellipse cx="90" cy="152" rx="19" ry="5" fill="none" stroke="#22c98a" stroke-width="4"/>
+            <rect id="svg-head" x="72" y="26" width="36" height="76" rx="14" fill="#f2ede6"/>
+            <rect x="74" y="28" width="8" height="72" rx="4" fill="rgba(255,255,255,0.2)"/>
+            <g id="svg-bristles" opacity="0.9">
+              <line x1="80" y1="20" x2="80" y2="32" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="85" y1="18" x2="85" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="90" y1="17" x2="90" y2="29" stroke="#38c9f5" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="95" y1="18" x2="95" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="100" y1="20" x2="100" y2="32" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="80" y1="36" x2="80" y2="48" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <line x1="86" y1="34" x2="86" y2="46" stroke="#38c9f5" stroke-width="2" stroke-linecap="round"/>
+              <line x1="92" y1="34" x2="92" y2="46" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <line x1="98" y1="36" x2="98" y2="48" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <ellipse cx="90" cy="260" rx="14" ry="6" fill="#c07840"/>
+            <text x="90" y="218" text-anchor="middle" font-size="9" font-weight="800" fill="rgba(255,255,255,0.35)" font-family="system-ui">BFA</text>
+          </svg>
+          <div id="bfa-name-badge" style="position:absolute;top:-12px;right:-18px;background:#1d1d1f;color:#fff;font-size:12px;font-weight:700;padding:6px 14px;border-radius:980px;white-space:nowrap;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s">Ma brosse</div>
+        </div>
+        <p style="font-size:13px;color:#6e6e73;text-align:center;max-width:200px;line-height:1.5">Visualisez votre tête de brosse à l'écran, comme elle sera dans votre salle de bain.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MINI JEU BROSSAGE -->
+  <div style="max-width:960px;margin:0 auto;padding-bottom:120px" class="fade-up">
+    <div style="text-align:center;margin-bottom:48px">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(21,88,214,0.08);color:#1558d6;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:6px 16px;border-radius:980px;margin-bottom:20px">🎮 Mini-jeu BFA</div>
+      <h3 style="font-size:clamp(32px,4.5vw,58px);font-weight:800;letter-spacing:-0.04em;color:#1d1d1f;line-height:1;margin-bottom:12px">2 minutes, deux fois par jour.</h3>
+      <p style="font-size:17px;color:#6e6e73;max-width:480px;margin:0 auto">On vous montre comment ça se passe avec une bonne brosse BFA. À vous de jouer.</p>
+    </div>
+    <div style="background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,0.07)">
+      <div style="padding:28px 40px;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="display:flex;align-items:center;gap:6px;background:#f5f5f7;padding:8px 16px;border-radius:12px">
+            <span style="font-size:13px;font-weight:600;color:#6e6e73">Points :</span>
+            <span id="game-score" style="font-size:18px;font-weight:800;color:#1d1d1f">0</span>
+          </div>
+          <div id="game-streak-wrap" style="display:flex;align-items:center;gap:6px;background:#fff8f0;padding:8px 16px;border-radius:12px;opacity:0;transition:opacity .3s">
+            <span style="font-size:14px">🔥</span>
+            <span id="game-streak" style="font-size:14px;font-weight:700;color:#fb923c">×1</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="display:flex;gap:6px" id="game-lives">
+            <span style="font-size:18px">❤️</span><span style="font-size:18px">❤️</span><span style="font-size:18px">❤️</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:12px;background:#f0f0f5">
+            <span style="font-size:14px">⏱</span>
+            <span id="game-timer" style="font-size:15px;font-weight:700;color:#1d1d1f;font-variant-numeric:tabular-nums">30</span>
+          </div>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;user-select:none">
+        <canvas id="game-canvas" style="display:block;width:100%;cursor:none"></canvas>
+        <div id="game-start-screen" style="position:absolute;inset:0;background:rgba(255,255,255,0.97);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px;text-align:center">
+          <div style="font-size:72px;line-height:1">🪥</div>
+          <div>
+            <h4 style="font-size:28px;font-weight:800;letter-spacing:-0.03em;color:#1d1d1f;margin-bottom:8px">Prêt(e) à vous brosser les dents ?</h4>
+            <p style="font-size:15px;color:#6e6e73;max-width:380px;line-height:1.6">Cliquez ou touchez les zones bleues qui apparaissent sur les dents. Plus vite vous êtes, plus vous marquez. Simple comme bonjour.</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+            <span style="font-size:12px;background:#f5f5f7;color:#6e6e73;padding:6px 14px;border-radius:980px">👆 Cliquer les zones</span>
+            <span style="font-size:12px;background:#f5f5f7;color:#6e6e73;padding:6px 14px;border-radius:980px">⏱ 30 secondes</span>
+            <span style="font-size:12px;background:#f5f5f7;color:#6e6e73;padding:6px 14px;border-radius:980px">🏆 Battez votre record</span>
+          </div>
+          <button onclick="startBFAGame()" style="padding:16px 40px;border-radius:980px;background:#1d1d1f;color:#fff;border:none;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .25s,box-shadow .25s" onmouseover="this.style.transform='scale(1.04)';this.style.boxShadow='0 8px 30px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">C'est parti →</button>
+        </div>
+        <div id="game-over-screen" style="position:absolute;inset:0;background:rgba(255,255,255,0.97);display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px;text-align:center">
+          <div id="go-emoji" style="font-size:72px;line-height:1">✨</div>
+          <div>
+            <h4 style="font-size:32px;font-weight:800;letter-spacing:-0.03em;color:#1d1d1f;margin-bottom:6px" id="go-title">Beau travail !</h4>
+            <p style="font-size:15px;color:#6e6e73;line-height:1.5" id="go-message">Dents nickel. Votre dentiste serait fier.</p>
+          </div>
+          <div style="display:flex;gap:16px;align-items:center">
+            <div style="background:#f5f5f7;border-radius:16px;padding:20px 28px;text-align:center">
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6e6e73;margin-bottom:4px">Score final</div>
+              <div id="go-score" style="font-size:40px;font-weight:800;color:#1d1d1f;letter-spacing:-0.04em">0</div>
+            </div>
+            <div style="background:#f0fdf6;border-radius:16px;padding:20px 28px;text-align:center">
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#22c98a;margin-bottom:4px">Meilleur</div>
+              <div id="go-best" style="font-size:40px;font-weight:800;color:#22c98a;letter-spacing:-0.04em">0</div>
+            </div>
+          </div>
+          <button onclick="startBFAGame()" style="padding:14px 36px;border-radius:980px;background:#22c98a;color:#fff;border:none;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .2s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''">Rejouer 🔄</button>
+        </div>
+        <div id="game-combo-msg" style="position:absolute;top:20px;left:50%;transform:translateX(-50%);pointer-events:none;opacity:0;font-size:22px;font-weight:800;color:#22c98a;transition:opacity .3s,transform .3s"></div>
+      </div>
+      <div style="padding:20px 40px 28px;display:flex;align-items:center;gap:16px">
+        <span style="font-size:13px;font-weight:600;color:#6e6e73;white-space:nowrap">Dents propres</span>
+        <div style="flex:1;height:8px;background:#f0f0f0;border-radius:4px;overflow:hidden">
+          <div id="game-progress-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#22c98a,#38c9f5);border-radius:4px;transition:width .3s ease"></div>
+        </div>
+        <span id="game-progress-pct" style="font-size:13px;font-weight:700;color:#1d1d1f;white-space:nowrap;min-width:36px">0%</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2230,6 +2382,315 @@ window.updateHeadPreview=function(color,name){
 };
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBFAModal()});
+</script>
+<script>
+// ══════════════════════════════════
+// PERSONNALISATION BFA
+// ══════════════════════════════════
+var bfaSelectedColor='#f2ede6';
+var bfaSelectedColorName='Naturel';
+
+window.selectBFAColor=function(el){
+  document.querySelectorAll('.bfa-swatch').forEach(function(s){
+    s.style.borderColor='transparent';s.style.transform='';
+  });
+  el.style.borderColor='#1d1d1f';
+  el.style.transform='scale(1.15)';
+  bfaSelectedColor=el.dataset.color;
+  bfaSelectedColorName=el.dataset.name;
+  document.getElementById('bfa-color-label').innerHTML='Coloris : <strong>'+bfaSelectedColorName+'</strong>';
+  var svgHead=document.getElementById('svg-head');
+  if(svgHead)svgHead.setAttribute('fill',bfaSelectedColor);
+  document.getElementById('bfa-tag-color').textContent='Tête '+bfaSelectedColorName+' · Made in France';
+  updateBFAPreview();
+};
+
+window.updateBFAPreview=function(){
+  var name=document.getElementById('bfa-name-input').value.trim();
+  var badge=document.getElementById('bfa-name-badge');
+  var tagName=document.getElementById('bfa-tag-name');
+  if(name){
+    badge.textContent=name+"'s BFA";
+    badge.style.opacity='1';
+    badge.style.transform='translateY(0)';
+    tagName.textContent='La brosse de '+name;
+  } else {
+    badge.style.opacity='0';
+    badge.style.transform='translateY(6px)';
+    tagName.textContent='Ma brosse BFA';
+  }
+};
+
+// ══════════════════════════════════
+// JEU BFA — BROSSAGE DE DENTS
+// ══════════════════════════════════
+(function initBFAGame(){
+  var canvas=document.getElementById('game-canvas');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  var W,H,targets=[],score=0,bestScore=0,timeLeft=30,streak=0,lives=3,progress=0;
+  var gameRunning=false,gameInterval=null,spawnInterval=null;
+  var brushX=0,brushY=0,brushAnim=0;
+  var particles=[];
+  var toothClean=new Array(8).fill(0);
+
+  function resize(){
+    var rect=canvas.getBoundingClientRect();
+    var dpr=window.devicePixelRatio||1;
+    W=canvas.width=rect.width*dpr;
+    var naturalH=Math.min(rect.width*0.65,520);
+    H=canvas.height=naturalH*dpr;
+    canvas.style.height=naturalH+'px';
+  }
+  resize();
+  window.addEventListener('resize',function(){resize();if(!gameRunning)drawScene(false);});
+
+  function getW(){return canvas.width/(window.devicePixelRatio||1);}
+  function getH(){return canvas.height/(window.devicePixelRatio||1);}
+
+  function getTeeth(){
+    var w=getW(),h=getH();
+    var toothW=w*0.085,toothH=h*0.38,gap=w*0.016;
+    var totalW=8*toothW+7*gap;
+    var startX=(w-totalW)/2;
+    var startY=h*0.28;
+    return Array.from({length:8},function(_,i){return{x:startX+i*(toothW+gap),y:startY,w:toothW,h:toothH,i:i};});
+  }
+
+  function drawScene(isRunning){
+    var dpr=window.devicePixelRatio||1;
+    ctx.save();
+    ctx.scale(dpr,dpr);
+    var w=getW(),h=getH();
+    ctx.clearRect(0,0,w,h);
+    var bg=ctx.createLinearGradient(0,0,0,h);
+    bg.addColorStop(0,'#f0f9ff');bg.addColorStop(1,'#e8f5e9');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+
+    var teeth=getTeeth();
+    ctx.save();
+    ctx.beginPath();
+    var gx=teeth[0].x-14,gy=teeth[0].y-20,gw=teeth[7].x+teeth[7].w-teeth[0].x+28;
+    if(ctx.roundRect){ctx.roundRect(gx,gy,gw,28,12);}else{ctx.rect(gx,gy,gw,28);}
+    ctx.fillStyle='#f9a8b8';ctx.fill();
+    ctx.restore();
+
+    teeth.forEach(function(t){
+      ctx.save();
+      ctx.shadowColor='rgba(0,0,0,0.06)';ctx.shadowBlur=8;ctx.shadowOffsetY=3;
+      var clean=toothClean[t.i]||0;
+      var lightness=88+clean*8;
+      var sat=40+clean*30;
+      var hue=210+clean*20;
+      ctx.beginPath();
+      if(ctx.roundRect){ctx.roundRect(t.x,t.y,t.w,t.h,8);}else{ctx.rect(t.x,t.y,t.w,t.h);}
+      ctx.fillStyle='hsl('+hue+','+sat+'%,'+lightness+'%)';
+      ctx.fill();
+      ctx.shadowBlur=0;
+      ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;ctx.stroke();
+      if(clean>0.8){
+        ctx.fillStyle='rgba(255,255,255,0.9)';
+        ctx.font='bold '+(10+clean*4)+'px system-ui';
+        ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillText('\u2736',t.x+t.w/2,t.y+t.h/2);
+      }
+      ctx.restore();
+    });
+
+    targets.forEach(function(tg){
+      if(!tg.active)return;
+      var age=(Date.now()-tg.born)/tg.life;
+      var alpha=age<0.2?age/0.2:age>0.8?(1-age)/0.2:1;
+      var pulse=1+Math.sin(Date.now()/120)*0.06;
+      ctx.save();
+      ctx.globalAlpha=alpha;
+      var grd=ctx.createRadialGradient(tg.x,tg.y,0,tg.x,tg.y,tg.r*1.6*pulse);
+      grd.addColorStop(0,'rgba(56,201,245,0.55)');
+      grd.addColorStop(0.5,'rgba(21,88,214,0.2)');
+      grd.addColorStop(1,'rgba(21,88,214,0)');
+      ctx.beginPath();ctx.arc(tg.x,tg.y,tg.r*1.6*pulse,0,Math.PI*2);
+      ctx.fillStyle=grd;ctx.fill();
+      ctx.beginPath();ctx.arc(tg.x,tg.y,tg.r*pulse,0,Math.PI*2);
+      ctx.fillStyle='rgba(21,88,214,0.85)';ctx.fill();
+      ctx.strokeStyle='rgba(255,255,255,0.6)';ctx.lineWidth=2;ctx.stroke();
+      ctx.fillStyle='#fff';ctx.font='bold '+(tg.r*0.9)+'px system-ui';
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText('\uD83E\uDEA5',tg.x,tg.y);
+      ctx.restore();
+    });
+
+    particles=particles.filter(function(p){return p.alpha>0.02;});
+    particles.forEach(function(p){
+      p.x+=p.vx;p.y+=p.vy;p.vy-=0.15;p.alpha-=0.025;
+      ctx.save();ctx.globalAlpha=p.alpha;
+      ctx.fillStyle=p.color;ctx.font='bold 16px system-ui';
+      ctx.textAlign='center';ctx.fillText(p.text,p.x,p.y);
+      ctx.restore();
+    });
+
+    if(isRunning){
+      brushAnim+=0.1;
+      ctx.save();
+      ctx.translate(brushX,brushY);
+      ctx.rotate(Math.sin(brushAnim)*0.15);
+      ctx.font='28px system-ui';
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText('\uD83E\uDEA5',0,0);
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  function spawnTarget(){
+    var teeth=getTeeth();
+    var t=teeth[Math.floor(Math.random()*teeth.length)];
+    var r=Math.min(t.w,t.h)*0.28;
+    targets.push({
+      x:t.x+t.w/2+(Math.random()-0.5)*t.w*0.3,
+      y:t.y+t.h*0.35+Math.random()*t.h*0.25,
+      r:r,tooth:t.i,
+      born:Date.now(),life:1800+Math.random()*600,active:true
+    });
+  }
+
+  function checkExpired(){
+    targets.forEach(function(tg){
+      if(!tg.active)return;
+      if(Date.now()-tg.born>tg.life){
+        tg.active=false;streak=0;lives=Math.max(0,lives-1);
+        updateLivesUI();
+        document.getElementById('game-streak-wrap').style.opacity='0';
+        if(lives===0)endGame();
+      }
+    });
+    targets=targets.filter(function(t){return t.active||(Date.now()-t.born<t.life+500);});
+  }
+
+  function updateLivesUI(){
+    var el=document.getElementById('game-lives');
+    var html='';
+    for(var i=0;i<3;i++){
+      html+='<span style="font-size:18px;opacity:'+(i<lives?1:0.2)+'">'+(i<lives?'❤️':'🖤')+'</span>';
+    }
+    el.innerHTML=html;
+  }
+
+  function hitTarget(px,py){
+    for(var i=targets.length-1;i>=0;i--){
+      var tg=targets[i];
+      if(!tg.active)continue;
+      var dist=Math.hypot(px-tg.x,py-tg.y);
+      if(dist<tg.r*1.4){
+        tg.active=false;streak++;
+        var pts=10*Math.min(streak,5);
+        score+=pts;
+        progress=Math.min(1,progress+0.085);
+        toothClean[tg.tooth]=Math.min(1,(toothClean[tg.tooth]||0)+0.35);
+        document.getElementById('game-score').textContent=score;
+        var pct=Math.round(progress*100);
+        document.getElementById('game-progress-bar').style.width=pct+'%';
+        document.getElementById('game-progress-pct').textContent=pct+'%';
+        if(streak>=2){
+          document.getElementById('game-streak-wrap').style.opacity='1';
+          document.getElementById('game-streak').textContent='×'+streak;
+        }
+        particles.push({x:tg.x,y:tg.y-10,vx:(Math.random()-0.5)*2,vy:2,alpha:1,text:'+'+pts,color:'#22c98a'});
+        if(streak>=2){
+          var msgEl=document.getElementById('game-combo-msg');
+          msgEl.textContent=streak>=5?'🔥 PARFAIT !':streak>=3?'Super combo !':'En forme !';
+          msgEl.style.opacity='1';msgEl.style.transform='translateX(-50%) translateY(-8px)';
+          clearTimeout(msgEl._t);
+          msgEl._t=setTimeout(function(){msgEl.style.opacity='0';msgEl.style.transform='translateX(-50%)';},900);
+        }
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function getGameCoords(e){
+    var rect=canvas.getBoundingClientRect();
+    var clientX=e.touches?e.touches[0].clientX:e.clientX;
+    var clientY=e.touches?e.touches[0].clientY:e.clientY;
+    return{x:clientX-rect.left,y:clientY-rect.top};
+  }
+
+  canvas.addEventListener('mousemove',function(e){var c=getGameCoords(e);brushX=c.x;brushY=c.y;});
+  canvas.addEventListener('click',function(e){if(!gameRunning)return;var c=getGameCoords(e);hitTarget(c.x,c.y);});
+  canvas.addEventListener('touchstart',function(e){e.preventDefault();if(!gameRunning)return;var c=getGameCoords(e);brushX=c.x;brushY=c.y;hitTarget(c.x,c.y);},{passive:false});
+  canvas.addEventListener('touchmove',function(e){e.preventDefault();var c=getGameCoords(e);brushX=c.x;brushY=c.y;if(gameRunning)hitTarget(c.x,c.y);},{passive:false});
+
+  window.startBFAGame=function(){
+    var startScreen=document.getElementById('game-start-screen');
+    startScreen.style.opacity='0';
+    document.getElementById('game-over-screen').style.display='none';
+    setTimeout(function(){startScreen.style.display='none';},500);
+    score=0;timeLeft=30;streak=0;lives=3;progress=0;
+    targets=[];particles=[];toothClean=new Array(8).fill(0);
+    document.getElementById('game-score').textContent='0';
+    document.getElementById('game-timer').textContent='30';
+    document.getElementById('game-timer').style.color='#1d1d1f';
+    document.getElementById('game-progress-bar').style.width='0%';
+    document.getElementById('game-progress-pct').textContent='0%';
+    document.getElementById('game-streak-wrap').style.opacity='0';
+    updateLivesUI();
+    gameRunning=true;
+    clearInterval(gameInterval);clearInterval(spawnInterval);
+    spawnInterval=setInterval(function(){
+      if(gameRunning){
+        var count=timeLeft>20?1:2;
+        for(var i=0;i<count;i++)spawnTarget();
+      }
+    },950);
+    gameInterval=setInterval(function(){
+      timeLeft--;
+      document.getElementById('game-timer').textContent=timeLeft;
+      checkExpired();
+      if(timeLeft<=10)document.getElementById('game-timer').style.color='#ff3b30';
+      if(timeLeft<=0)endGame();
+    },1000);
+    requestAnimationFrame(loop);
+  };
+
+  function endGame(){
+    gameRunning=false;
+    clearInterval(gameInterval);clearInterval(spawnInterval);
+    if(score>bestScore)bestScore=score;
+    var screen=document.getElementById('game-over-screen');
+    document.getElementById('go-score').textContent=score;
+    document.getElementById('go-best').textContent=bestScore;
+    var msgs=[
+      [80,'🌟','Vous êtes une machine !','Dents impeccables. Vous pouvez sourire les yeux fermés.'],
+      [50,'✨','Très bien joué !','Votre dentiste serait vraiment fier de vous.'],
+      [25,'👏','Pas mal du tout !','Avec une BFA dans les mains, vous serez imbattable.'],
+      [0,'😄','C\'est un début !','La prochaine fois, vous allez tout déchirer.']
+    ];
+    var m=msgs.find(function(x){return score>=x[0];});
+    document.getElementById('go-emoji').textContent=m[1];
+    document.getElementById('go-title').textContent=m[2];
+    document.getElementById('go-message').textContent=m[3];
+    screen.style.display='flex';
+  }
+
+  function loop(){
+    drawScene(gameRunning);
+    if(gameRunning)requestAnimationFrame(loop);
+  }
+
+  drawScene(false);
+  new ResizeObserver(function(){resize();if(!gameRunning)drawScene(false);}).observe(canvas);
+})();
+
+// Responsive perso grid
+(function(){
+  function checkPersoGrid(){
+    var g=document.getElementById('perso-grid');
+    if(!g)return;
+    g.style.gridTemplateColumns=window.innerWidth<640?'1fr':'1fr 1fr';
+  }
+  checkPersoGrid();
+  window.addEventListener('resize',checkPersoGrid);
+})();
 </script>
 </body>
 </html>
